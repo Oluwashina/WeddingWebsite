@@ -7,11 +7,6 @@ import { SmartImage } from "@/components/ui/SmartImage";
 import { ArrowRightIcon, CloseIcon } from "@/components/ui/icons";
 import { useEscapeKey, useLockBodyScroll } from "@/lib/hooks";
 import type { Couple, Photo } from "@/lib/types";
-import { cn } from "@/lib/utils";
-
-// Repeating rhythm of tall/short tiles keeps the mosaic from feeling mechanical.
-const ASPECTS = ["aspect-[4/5]", "aspect-[3/4]", "aspect-[1/1]", "aspect-[4/5]", "aspect-[3/4]", "aspect-[1/1]"];
-
 export function Gallery({ photos, couple }: { photos: Photo[]; couple: Couple }) {
   const [index, setIndex] = useState<number | null>(null);
   const open = index !== null;
@@ -46,13 +41,13 @@ export function Gallery({ photos, couple }: { photos: Photo[]; couple: Couple })
       title="Moments Before The Moment"
       intro="Engagement shoots, quiet afternoons and a few frames our photographer swears we didn't notice."
     >
-      <div className="columns-2 gap-3 sm:gap-4 lg:columns-3">
+      <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3">
         {photos.map((photo, i) => (
           <motion.button
             key={photo.src}
             type="button"
             onClick={() => setIndex(i)}
-            className="group mb-3 block w-full overflow-hidden rounded-[0.9rem] sm:mb-4"
+            className="group block w-full overflow-hidden rounded-[0.9rem]"
             initial={{ opacity: 0, y: 22 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-6% 0px" }}
@@ -64,7 +59,7 @@ export function Gallery({ photos, couple }: { photos: Photo[]; couple: Couple })
                 photo={photo}
                 monogram={couple.monogram}
                 sizes="(max-width: 640px) 48vw, (max-width: 1024px) 45vw, 30vw"
-                className={cn("w-full", ASPECTS[i % ASPECTS.length])}
+                className="aspect-[4/5] w-full"
               />
               <span
                 className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,transparent_55%,rgba(29,25,22,0.45))] opacity-0 transition-opacity duration-500 group-hover:opacity-100"

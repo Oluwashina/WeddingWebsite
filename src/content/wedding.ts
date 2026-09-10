@@ -114,8 +114,8 @@ export const weddingContent: WeddingContent = {
       body:
         "Every great love story has a first chapter. Ours began with laughter, long conversations, and the quiet certainty that this was something special.",
       photo: {
-        src: "/images/gallery-couple-01.jpeg",
-        alt: "Temitope and Victor",
+        src: "/images/story-how-it-started.jpeg",
+        alt: "Temitope and Victor, how it started",
       },
     },
     {
@@ -126,8 +126,8 @@ export const weddingContent: WeddingContent = {
       body:
         "From everyday moments to milestone memories, we learned to choose each other, in patience, in joy, and in faith.",
       photo: {
-        src: "/images/portrait-couple.jpeg",
-        alt: "Temitope and Victor together",
+        src: "/images/story-growing-together.jpeg",
+        alt: "Temitope and Victor growing together",
       },
     },
     {
@@ -138,8 +138,8 @@ export const weddingContent: WeddingContent = {
       body:
         "On December 3rd, surrounded by the people who prayed us here, we say yes to forever. We cannot wait to celebrate with you.",
       photo: {
-        src: "/images/hero-couple.jpeg",
-        alt: "Temitope and Victor",
+        src: "/images/story-forever-starts.jpeg",
+        alt: "Temitope and Victor, forever starts here",
       },
     },
   ],
@@ -362,12 +362,41 @@ export const weddingContent: WeddingContent = {
   ],
 
   gallery: [
-    { src: "/images/hero-couple.jpeg", alt: "Temitope and Victor", caption: "Temitope & Victor" },
-    { src: "/images/portrait-couple.jpeg", alt: "Temitope and Victor smiling", caption: "Together" },
-    { src: "/images/gallery-couple-01.jpeg", alt: "Temitope and Victor", caption: "#LOVETV" },
-    { src: "/images/gallery-03.jpg", alt: "Celebration moment", caption: "Joy" },
-    { src: "/images/gallery-06.jpg", alt: "Golden hour", caption: "Golden hour" },
-    { src: "/images/gallery-08.jpg", alt: "Behind the scenes", caption: "Behind the scenes" },
+    {
+      src: "/images/gallery-couple-02.jpeg",
+      alt: "Temitope and Victor painting together",
+      caption: "Date night",
+    },
+    {
+      src: "/images/gallery-couple-03.jpeg",
+      alt: "Temitope and Victor smiling at home",
+      caption: "Us",
+    },
+    {
+      src: "/images/gallery-couple-04.jpeg",
+      alt: "Temitope and Victor holding hands",
+      caption: "Together",
+    },
+    {
+      src: "/images/gallery-couple-05.jpeg",
+      alt: "Temitope and Victor at an event",
+      caption: "Celebrating",
+    },
+    {
+      src: "/images/gallery-couple-06.jpeg",
+      alt: "Temitope and Victor dressed up",
+      caption: "Dressed up",
+    },
+    {
+      src: "/images/gallery-couple-07.jpeg",
+      alt: "Temitope and Victor sharing a moment",
+      caption: "Our favourite",
+    },
+    {
+      src: "/images/gallery-couple-08.jpeg",
+      alt: "Temitope and Victor",
+      caption: "#LOVETV",
+    },
   ],
 
   dressCode: {
