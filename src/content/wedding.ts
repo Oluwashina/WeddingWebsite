@@ -219,13 +219,12 @@ export const weddingContent: WeddingContent = {
     headline: "Your Presence Is Our Greatest Gift",
     intro:
       "Showing up is more than enough, truly. But we have been asked so many times that we finally made a list. Everything here is optional.",
-    note: "Gifts can also be brought on the day. For cash gifts, transfer directly to the account shown.",
     showBankDetails: true,
     bankAccounts: [
       {
-        bankName: "Access Bank",
-        accountName: "Temitope Oladimeji",
-        accountNumber: "0034074817",
+        bankName: "Providus Bank",
+        accountName: "Oladimeji Temitope Esther",
+        accountNumber: "6504753013",
         currency: "NGN",
         note: "Please use your name as the transfer reference so we can thank you properly.",
       },
@@ -295,10 +294,10 @@ export const weddingContent: WeddingContent = {
       },
       {
         id: "gift-cash",
-        name: "Bless Us As You Are Led",
+        name: "Thank You For Your Gift of Love",
         category: "cash",
         description:
-          "No amount, no expectation. If you would prefer to give cash, transfer to the account below. We receive it with both hands.",
+          "We greatly appreciate your kind heartedness in choosing to gift us for our wedding. You can transfer to us using the account below. We fully receive it with both hands.",
         currency: "NGN",
         photo: { src: "/images/registry-cash.jpg", alt: "A gold envelope resting on ivory paper" },
         isContribution: true,

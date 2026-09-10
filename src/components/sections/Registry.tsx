@@ -121,9 +121,11 @@ export function Registry({ registry, couple }: RegistryProps) {
         ))}
       </motion.div>
 
-      <Reveal className="mx-auto mt-12 max-w-2xl text-center">
-        <p className="text-[0.9rem] leading-relaxed text-ink-muted">{registry.note}</p>
-      </Reveal>
+      {registry.note ? (
+        <Reveal className="mx-auto mt-12 max-w-2xl text-center">
+          <p className="text-[0.9rem] leading-relaxed text-ink-muted">{registry.note}</p>
+        </Reveal>
+      ) : null}
 
       <Sheet
         open={Boolean(activeItem)}

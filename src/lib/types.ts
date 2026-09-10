@@ -155,7 +155,7 @@ export interface Registry {
   id: Id;
   headline: string;
   intro: string;
-  note: string;
+  note?: string;
   items: RegistryItem[];
   /** Bank details stay hidden until the couple explicitly enables them. */
   showBankDetails: boolean;
