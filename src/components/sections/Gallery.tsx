@@ -7,6 +7,7 @@ import { SmartImage } from "@/components/ui/SmartImage";
 import { ArrowRightIcon, CloseIcon } from "@/components/ui/icons";
 import { useEscapeKey, useLockBodyScroll } from "@/lib/hooks";
 import type { Couple, Photo } from "@/lib/types";
+
 export function Gallery({ photos, couple }: { photos: Photo[]; couple: Couple }) {
   const [index, setIndex] = useState<number | null>(null);
   const open = index !== null;

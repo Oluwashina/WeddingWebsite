@@ -46,6 +46,11 @@ export async function generateMetadata(): Promise<Metadata> {
       description,
     },
     robots: { index: true, follow: true },
+    icons: {
+      icon: [{ url: couple.logo?.src ?? "/images/tv-logo.png", type: "image/png" }],
+      apple: couple.logo?.src ?? "/images/tv-logo.png",
+      shortcut: couple.logo?.src ?? "/images/tv-logo.png",
+    },
   };
 }
 
