@@ -87,7 +87,7 @@ export function Faq({ faqs }: { faqs: FaqItem[] }) {
       tone="sand"
       eyebrow="Good To Know"
       title="Questions, Answered"
-      intro="If something isn't covered here, message us — a real person replies."
+      intro="If something isn't covered here, message us. A real person replies."
     >
       <div className="mx-auto max-w-3xl border-t border-ink/10">
         {faqs.map((item, index) => (

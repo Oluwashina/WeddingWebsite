@@ -11,7 +11,7 @@ function escapeIcsText(value: string): string {
 export function googleCalendarUrl(event: WeddingEvent, coupleNames: string): string {
   const params = new URLSearchParams({
     action: "TEMPLATE",
-    text: `${coupleNames} — ${event.name}`,
+    text: `${coupleNames}: ${event.name}`,
     dates: `${toUtcStamp(event.startsAt)}/${toUtcStamp(event.endsAt)}`,
     details: `${event.description}\n\nDress code: ${event.dressCode}`,
     location: `${event.venue}, ${event.address}`,
@@ -30,7 +30,7 @@ export function buildIcs(event: WeddingEvent, coupleNames: string): string {
     `DTSTAMP:${toUtcStamp(new Date().toISOString())}`,
     `DTSTART:${toUtcStamp(event.startsAt)}`,
     `DTEND:${toUtcStamp(event.endsAt)}`,
-    `SUMMARY:${escapeIcsText(`${coupleNames} — ${event.name}`)}`,
+    `SUMMARY:${escapeIcsText(`${coupleNames}: ${event.name}`)}`,
     `DESCRIPTION:${escapeIcsText(`${event.description}\nDress code: ${event.dressCode}`)}`,
     `LOCATION:${escapeIcsText(`${event.venue}, ${event.address}`)}`,
     "BEGIN:VALARM",

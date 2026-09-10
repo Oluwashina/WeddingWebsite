@@ -13,9 +13,12 @@ export function Contact({ contacts, couple }: { contacts: ContactType[]; couple:
       id="contact"
       eyebrow="Need Help?"
       title="We're Only A Message Away"
-      intro="Lost, late, unsure what to wear, or need to change your RSVP? Reach out — no question is too small."
+      intro="Lost, late, unsure what to wear, or need to change your RSVP? Reach out. No question is too small."
     >
-      <RevealGroup className="mx-auto grid max-w-4xl gap-6 md:grid-cols-2">
+      <RevealGroup
+        className="mx-auto grid max-w-4xl gap-6 sm:grid-cols-2"
+        stagger={0.12}
+      >
         {contacts.map((contact) => (
           <RevealItem key={contact.id} className="h-full">
             <article className="flex h-full flex-col rounded-[1.25rem] border border-ink/8 bg-ivory-deep/50 p-6 sm:p-8">

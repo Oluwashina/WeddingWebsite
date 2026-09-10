@@ -1,96 +1,22 @@
 "use client";
 
 import { AnimatePresence, motion } from "motion/react";
-import { useCallback, useEffect, useRef, useState } from "react";
 import { useInvitation } from "@/components/experience/InvitationContext";
+import { useMusic } from "@/components/layout/MusicProvider";
 import { MusicIcon, MusicOffIcon } from "@/components/ui/icons";
 import type { WeddingMeta } from "@/lib/types";
 
-const STORAGE_KEY = "ww:music-playing";
-
 /**
- * Opt-in only: nothing plays until the guest taps this. The control stays visible
- * even if autoplay is blocked — only a missing or broken file hides it.
+ * Starts automatically when the guest opens or skips the envelope (user gesture).
+ * They can pause any time; that choice is remembered for the session.
  */
 export function MusicToggle({ meta }: { meta: WeddingMeta }) {
   const { isRevealed } = useInvitation();
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-  const [playing, setPlaying] = useState(false);
-  const [loadFailed, setLoadFailed] = useState(false);
+  const music = useMusic();
 
-  const syncPlaying = useCallback((next: boolean) => {
-    setPlaying(next);
-    try {
-      if (next) {
-        window.sessionStorage.setItem(STORAGE_KEY, "1");
-      } else {
-        window.sessionStorage.removeItem(STORAGE_KEY);
-      }
-    } catch {
-      /* private mode */
-    }
-  }, []);
+  if (!meta.musicTrack || !music || music.loadFailed) return null;
 
-  // The <audio> element only mounts once the invitation is revealed, so listeners
-  // must attach then — not on the first mount while the ref is still null.
-  useEffect(() => {
-    if (!isRevealed) return;
-
-    const audio = audioRef.current;
-    if (!audio) return;
-
-    const onPlay = () => syncPlaying(true);
-    const onPause = () => syncPlaying(false);
-
-    audio.addEventListener("play", onPlay);
-    audio.addEventListener("pause", onPause);
-
-    return () => {
-      audio.removeEventListener("play", onPlay);
-      audio.removeEventListener("pause", onPause);
-      audio.pause();
-    };
-  }, [isRevealed, syncPlaying]);
-
-  // Resume after refresh only if the guest had music on before.
-  useEffect(() => {
-    if (!isRevealed) return;
-    try {
-      if (window.sessionStorage.getItem(STORAGE_KEY) !== "1") return;
-    } catch {
-      return;
-    }
-
-    const audio = audioRef.current;
-    if (!audio) return;
-
-    audio.volume = 0.35;
-    audio.play().catch(() => {
-      /* Browser still needs a tap — leave the button visible. */
-    });
-  }, [isRevealed]);
-
-  if (!meta.musicTrack || loadFailed) return null;
-
-  const toggle = async () => {
-    const audio = audioRef.current;
-    if (!audio) return;
-
-    // Trust the element, not React state — listeners may not have fired yet.
-    if (!audio.paused) {
-      audio.pause();
-      syncPlaying(false);
-      return;
-    }
-
-    audio.volume = 0.35;
-    try {
-      await audio.play();
-      syncPlaying(true);
-    } catch {
-      /* Gesture was rejected — button stays so they can try again. */
-    }
-  };
+  const { playing, toggle, title } = music;
 
   return (
     <AnimatePresence>
@@ -104,10 +30,10 @@ export function MusicToggle({ meta }: { meta: WeddingMeta }) {
         >
           <button
             type="button"
-            onClick={toggle}
+            onClick={() => void toggle()}
             aria-pressed={playing}
-            aria-label={playing ? "Pause music" : `Play ${meta.musicTrack.title}`}
-            title={meta.musicTrack.title}
+            aria-label={playing ? "Pause music" : `Play ${title ?? meta.musicTrack!.title}`}
+            title={title ?? meta.musicTrack!.title}
             className="group relative flex h-11 w-11 items-center justify-center rounded-full border border-ink/10 bg-ivory/95 text-ink-soft shadow-[0_12px_34px_-16px_rgba(29,25,22,0.7)] backdrop-blur-md transition-colors hover:border-gold/50 hover:text-gold"
           >
             {playing ? <MusicIcon /> : <MusicOffIcon />}
@@ -119,13 +45,6 @@ export function MusicToggle({ meta }: { meta: WeddingMeta }) {
               />
             ) : null}
           </button>
-          <audio
-            ref={audioRef}
-            src={meta.musicTrack.src}
-            loop
-            preload="metadata"
-            onError={() => setLoadFailed(true)}
-          />
         </motion.div>
       ) : null}
     </AnimatePresence>

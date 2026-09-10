@@ -1,5 +1,6 @@
 import { InvitationGate } from "@/components/experience/InvitationGate";
 import { Footer } from "@/components/layout/Footer";
+import { MusicProvider } from "@/components/layout/MusicProvider";
 import { MusicToggle } from "@/components/layout/MusicToggle";
 import { Navbar } from "@/components/layout/Navbar";
 import { StickyRsvpBar } from "@/components/layout/StickyRsvpBar";
@@ -21,25 +22,27 @@ export default async function HomePage() {
     content;
 
   return (
-    <InvitationGate couple={couple} meta={meta}>
-      <Navbar couple={couple} meta={meta} />
+    <MusicProvider track={meta.musicTrack}>
+      <InvitationGate couple={couple} meta={meta}>
+        <Navbar couple={couple} meta={meta} />
 
-      <main>
-        <Hero couple={couple} meta={meta} />
-        <Story story={story} couple={couple} />
-        <Events events={events} couple={couple} />
-        <Rsvp couple={couple} meta={meta} events={events} contact={contacts[0]} />
-        <AsoEbi asoEbi={asoEbi} couple={couple} />
-        <DressCode looks={dressCode} couple={couple} />
-        <Gallery photos={gallery} couple={couple} />
-        <Registry registry={registry} couple={couple} contact={contacts[0]} />
-        <Faq faqs={faqs} />
-        <Contact contacts={contacts} couple={couple} />
-      </main>
+        <main>
+          <Hero couple={couple} meta={meta} />
+          <Story story={story} couple={couple} />
+          <Events events={events} couple={couple} />
+          <Rsvp couple={couple} meta={meta} events={events} contact={contacts[0]} />
+          <AsoEbi asoEbi={asoEbi} couple={couple} />
+          <DressCode looks={dressCode} couple={couple} />
+          <Gallery photos={gallery} couple={couple} />
+          <Registry registry={registry} couple={couple} contact={contacts[0]} />
+          <Faq faqs={faqs} />
+          <Contact contacts={contacts} couple={couple} />
+        </main>
 
-      <Footer couple={couple} meta={meta} socials={socials} />
-      <StickyRsvpBar meta={meta} />
-      <MusicToggle meta={meta} />
-    </InvitationGate>
+        <Footer couple={couple} meta={meta} socials={socials} />
+        <StickyRsvpBar meta={meta} />
+        <MusicToggle meta={meta} />
+      </InvitationGate>
+    </MusicProvider>
   );
 }

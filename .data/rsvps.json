@@ -103,5 +103,20 @@
     "id": "rsvp_mtkevzw3",
     "reference": "AT-NW7WMZ",
     "createdAt": "2026-09-02T18:10:28.851Z"
+  },
+  {
+    "fullName": "Oluwashina Kure-Ojo",
+    "contact": "afriknigeria@gmail.com",
+    "attending": "yes",
+    "guestCount": 1,
+    "events": [
+      "white",
+      "reception",
+      "traditional"
+    ],
+    "mealPreference": "jollof",
+    "id": "rsvp_mtvm0f5m",
+    "reference": "AT-UB79XF",
+    "createdAt": "2026-09-10T14:15:20.506Z"
   }
 ]

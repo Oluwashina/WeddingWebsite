@@ -7,7 +7,8 @@ import { Ornament } from "@/components/ui/Ornament";
 import { Reveal } from "@/components/ui/Reveal";
 import { SmartImage } from "@/components/ui/SmartImage";
 import { Button, ButtonLink } from "@/components/ui/Button";
-import { CheckIcon, CopyIcon, ShareIcon, WhatsAppIcon } from "@/components/ui/icons";
+import { ShareButton } from "@/components/layout/ShareButton";
+import { CheckIcon, CopyIcon, WhatsAppIcon } from "@/components/ui/icons";
 import { useCopyToClipboard } from "@/lib/hooks";
 import { saveLocalRsvp, submitRsvp, useLocalRsvp } from "@/lib/rsvp-client";
 import { MAX_GUESTS, validateRsvp, type FieldErrors } from "@/lib/rsvp-validation";
@@ -242,8 +243,8 @@ export function Rsvp({ couple, meta, events, contact }: RsvpProps) {
                     </h3>
                     <p className="mt-3 max-w-sm text-[1rem] leading-[1.85] text-ink-soft">
                       {done.attending === "yes"
-                        ? "We can't wait to celebrate with you. Keep an eye on your phone — we'll send venue reminders a week before."
-                        : "We'll miss you, truly. Thank you for letting us know — we'll make sure you get photos from the day."}
+                        ? "We can't wait to celebrate with you. Keep an eye on your phone. We'll send venue reminders a week before."
+                        : "We'll miss you, truly. Thank you for letting us know. We'll make sure you get photos from the day."}
                     </p>
 
                     <Ornament className="mt-7" />
@@ -282,13 +283,7 @@ export function Rsvp({ couple, meta, events, contact }: RsvpProps) {
                         <WhatsAppIcon width={16} height={16} />
                         Message us
                       </ButtonLink>
-                      <ButtonLink
-                        href={`https://wa.me/?text=${encodeURIComponent(`${meta.shareMessage} ${meta.siteUrl}`)}`}
-                        fullWidth
-                      >
-                        <ShareIcon width={16} height={16} />
-                        Share invite
-                      </ButtonLink>
+                      <ShareButton meta={meta} variant="button" label="Share invite" fullWidth />
                     </div>
 
                     {existing && !confirmed ? (

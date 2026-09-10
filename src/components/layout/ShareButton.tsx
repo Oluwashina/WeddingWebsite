@@ -1,10 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, ButtonLink } from "@/components/ui/Button";
 import { Sheet } from "@/components/ui/Sheet";
 import { CheckIcon, CopyIcon, ShareIcon, WhatsAppIcon } from "@/components/ui/icons";
 import { useCopyToClipboard } from "@/lib/hooks";
+import {
+  getInvitationShareText,
+  getInvitationShareUrl,
+  getInvitationWhatsAppHref,
+  shareInvitation,
+} from "@/lib/share";
 import type { WeddingMeta } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
@@ -13,32 +19,37 @@ interface ShareButtonProps {
   className?: string;
   label?: string;
   variant?: "icon" | "button";
+  fullWidth?: boolean;
 }
 
 /**
  * Uses the native share sheet where available (most phones), and falls back to
  * a WhatsApp deep link plus copy-to-clipboard everywhere else.
  */
-export function ShareButton({ meta, className, label = "Share", variant = "icon" }: ShareButtonProps) {
+export function ShareButton({
+  meta,
+  className,
+  label = "Share",
+  variant = "icon",
+  fullWidth,
+}: ShareButtonProps) {
   const [fallbackOpen, setFallbackOpen] = useState(false);
-  const [copied, copy] = useCopyToClipboard();
+  const [shareUrl, setShareUrl] = useState(meta.siteUrl);
+  const [copiedLink, copyLink] = useCopyToClipboard();
+  const [copiedText, copyText] = useCopyToClipboard();
 
-  const shareText = `${meta.shareMessage} ${meta.siteUrl}`;
+  useEffect(() => {
+    setShareUrl(getInvitationShareUrl(meta));
+  }, [meta]);
+
+  const shareText = getInvitationShareText(meta, shareUrl);
+  const whatsappHref = getInvitationWhatsAppHref(meta, shareUrl);
 
   const handleShare = async () => {
-    if (typeof navigator !== "undefined" && navigator.share) {
-      try {
-        await navigator.share({
-          title: "You're invited",
-          text: meta.shareMessage,
-          url: meta.siteUrl,
-        });
-        return;
-      } catch {
-        /* guest dismissed the sheet, or sharing is unavailable */
-      }
+    const outcome = await shareInvitation(meta, shareUrl);
+    if (outcome === "fallback") {
+      setFallbackOpen(true);
     }
-    setFallbackOpen(true);
   };
 
   return (
@@ -56,7 +67,13 @@ export function ShareButton({ meta, className, label = "Share", variant = "icon"
           <ShareIcon />
         </button>
       ) : (
-        <Button variant="outline" size="md" onClick={handleShare} className={className}>
+        <Button
+          variant="outline"
+          size="md"
+          onClick={handleShare}
+          fullWidth={fullWidth}
+          className={className}
+        >
           <ShareIcon width={16} height={16} />
           {label}
         </Button>
@@ -70,20 +87,20 @@ export function ShareButton({ meta, className, label = "Share", variant = "icon"
       >
         <div className="flex flex-col gap-4">
           <p className="text-[0.95rem] leading-relaxed text-ink-soft">{meta.shareMessage}</p>
-          <div className="rounded-xl border border-ink/10 bg-ivory-deep/60 px-4 py-3 font-sans text-sm text-ink-soft">
-            {meta.siteUrl}
+          <div className="rounded-xl border border-ink/10 bg-ivory-deep/60 px-4 py-3 font-sans text-sm text-ink-soft break-all">
+            {shareUrl}
           </div>
-          <ButtonLink
-            href={`https://wa.me/?text=${encodeURIComponent(shareText)}`}
-            variant="primary"
-            fullWidth
-          >
+          <ButtonLink href={whatsappHref} variant="primary" fullWidth target="_self">
             <WhatsAppIcon width={17} height={17} />
             Share on WhatsApp
           </ButtonLink>
-          <Button variant="outline" fullWidth onClick={() => copy(meta.siteUrl)}>
-            {copied ? <CheckIcon width={16} height={16} /> : <CopyIcon width={16} height={16} />}
-            {copied ? "Link copied" : "Copy link"}
+          <Button variant="outline" fullWidth onClick={() => copyText(shareText)}>
+            {copiedText ? <CheckIcon width={16} height={16} /> : <CopyIcon width={16} height={16} />}
+            {copiedText ? "Message copied" : "Copy message"}
+          </Button>
+          <Button variant="outline" fullWidth onClick={() => copyLink(shareUrl)}>
+            {copiedLink ? <CheckIcon width={16} height={16} /> : <CopyIcon width={16} height={16} />}
+            {copiedLink ? "Link copied" : "Copy link"}
           </Button>
         </div>
       </Sheet>

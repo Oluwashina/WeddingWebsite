@@ -20,7 +20,7 @@ export const weddingContent: WeddingContent = {
     invitationEyebrow: "Tune in to",
     invitationHeadline: "#LOVETV",
     introduction:
-      "Two hearts, one love story, and a celebration we cannot wait to share with you. Join us as we begin forever — dressed in joy, surrounded by family, and dancing far too late into the night.",
+      "Two hearts, one love story, and a celebration we cannot wait to share with you. Join us as we begin forever, dressed in joy, surrounded by family, and dancing far too late into the night.",
     logo: {
       src: "/images/tv-logo.png",
       alt: "#LOVETV",
@@ -53,10 +53,10 @@ export const weddingContent: WeddingContent = {
     rsvpDeadlineDisplay: "Friday, 30 October 2026",
     siteUrl: "https://lovetv.wedding",
     shareMessage:
-      "Temitope & Victor are getting married on December 3rd, 2026. Tune in to #LOVETV — open your invitation here:",
+      "Temitope & Victor are getting married on December 3rd, 2026. Tune in to #LOVETV and open your invitation here:",
     musicTrack: {
       src: "/audio/why-i-love-you.mp3",
-      title: "Why I Love You — Major",
+      title: "Why I Love You by Major",
     },
   },
 
@@ -67,11 +67,11 @@ export const weddingContent: WeddingContent = {
       name: "Traditional Wedding",
       subtitle: "The main ceremony",
       description:
-        "Join us for our traditional wedding ceremony — colour, culture, music and the joy of two families becoming one.",
+        "Join us for our traditional wedding ceremony, with colour, culture, music and the joy of two families becoming one.",
       startsAt: "2026-12-03T11:00:00+01:00",
       endsAt: "2026-12-03T13:00:00+01:00",
       displayDate: "Thursday, 3 December 2026",
-      displayTime: "11:00 AM — 1:00 PM",
+      displayTime: "11:00 AM to 1:00 PM",
       venue: "Venue details coming soon",
       address: "Lagos, Nigeria",
       mapsQuery: "Lagos, Nigeria",
@@ -93,11 +93,11 @@ export const weddingContent: WeddingContent = {
       startsAt: "2026-12-03T14:00:00+01:00",
       endsAt: "2026-12-03T22:00:00+01:00",
       displayDate: "Thursday, 3 December 2026",
-      displayTime: "2:00 PM — 10:00 PM",
+      displayTime: "2:00 PM to 10:00 PM",
       venue: "Venue details coming soon",
       address: "Lagos, Nigeria",
       mapsQuery: "Lagos, Nigeria",
-      dressCode: "Cocktail glamour — blush, caramel and black",
+      dressCode: "Cocktail glamour in blush, caramel and black",
       accentColor: "#b8956a",
       photo: {
         src: "/images/event-reception.jpg",
@@ -126,7 +126,7 @@ export const weddingContent: WeddingContent = {
       title: "Growing Together",
       location: "Through every season",
       body:
-        "From everyday moments to milestone memories, we learned to choose each other — in patience, in joy, and in faith.",
+        "From everyday moments to milestone memories, we learned to choose each other, in patience, in joy, and in faith.",
       photo: {
         src: "/images/portrait-couple.jpeg",
         alt: "Temitope and Victor together",
@@ -150,7 +150,7 @@ export const weddingContent: WeddingContent = {
     id: "aso-ebi-2026",
     headline: "Be Part of the Celebration",
     intro:
-      "Our Aso Ebi is blush pink — the same beautiful cloth for ladies and gentlemen. Wearing it is entirely optional, and you are loved either way.",
+      "Our Aso Ebi is blush pink, the same beautiful cloth for ladies and gentlemen. Wearing it is entirely optional, and you are loved either way.",
     deadline: "2026-10-15T23:59:00+01:00",
     deadlineDisplay: "Thursday, 15 October 2026",
     showBankDetails: true,
@@ -181,7 +181,7 @@ export const weddingContent: WeddingContent = {
       {
         id: "aso-ebi-ladies",
         name: "For the Ladies",
-        fabric: "Blush pink Aso Ebi outfit — premium fabric with matching gele",
+        fabric: "Blush pink Aso Ebi outfit, premium fabric with matching gele",
         currency: "NGN",
         colorway: "Blush pink",
         swatches: ["#e8a4ad", "#f5dde1", "#d4929c"],
@@ -199,7 +199,7 @@ export const weddingContent: WeddingContent = {
       {
         id: "aso-ebi-gents",
         name: "For the Gentlemen",
-        fabric: "Blush pink Aso Ebi outfit — premium fabric with matching cap",
+        fabric: "Blush pink Aso Ebi outfit, premium fabric with matching cap",
         currency: "NGN",
         colorway: "Blush pink",
         swatches: ["#e8a4ad", "#f5dde1", "#d4929c"],
@@ -221,7 +221,7 @@ export const weddingContent: WeddingContent = {
     id: "registry-2026",
     headline: "Your Presence Is Our Greatest Gift",
     intro:
-      "Truly — showing up is more than enough. But we have been asked so many times that we finally made a list. Everything here is optional.",
+      "Showing up is more than enough, truly. But we have been asked so many times that we finally made a list. Everything here is optional.",
     note: "Gifts can also be brought on the day. For cash gifts, transfer directly to the account shown.",
     showBankDetails: true,
     bankAccounts: [
@@ -249,7 +249,7 @@ export const weddingContent: WeddingContent = {
         id: "gift-linens",
         name: "Linen Bedding Set",
         category: "home",
-        description: "Soft, stone-washed linen in blush and ivory — for slow mornings together.",
+        description: "Soft, stone-washed linen in blush and ivory, for slow mornings together.",
         amount: 120000,
         currency: "NGN",
         photo: { src: "/images/registry-linen.jpg", alt: "Folded linen bedding" },
@@ -259,7 +259,7 @@ export const weddingContent: WeddingContent = {
         id: "gift-flights",
         name: "Honeymoon Flights",
         category: "travel",
-        description: "Help us get to our honeymoon destination — every mile is a memory waiting to happen.",
+        description: "Help us get to our honeymoon destination. Every mile is a memory waiting to happen.",
         amount: 250000,
         currency: "NGN",
         photo: { src: "/images/registry-travel.jpg", alt: "Turquoise water and a wooden boat" },
@@ -269,7 +269,7 @@ export const weddingContent: WeddingContent = {
         id: "gift-villa",
         name: "A Night by the Water",
         category: "travel",
-        description: "Gift us one night of our honeymoon stay — sunrise swim included.",
+        description: "Gift us one night of our honeymoon stay, sunrise swim included.",
         amount: 180000,
         currency: "NGN",
         photo: { src: "/images/registry-villa.jpg", alt: "A quiet beach house terrace at sunrise" },
@@ -279,7 +279,7 @@ export const weddingContent: WeddingContent = {
         id: "gift-spa",
         name: "Couples Spa Day",
         category: "experiences",
-        description: "A relaxed afternoon of massages and quiet — our treat to ourselves after the wedding whirlwind.",
+        description: "A relaxed afternoon of massages and quiet, our treat to ourselves after the wedding whirlwind.",
         amount: 95000,
         currency: "NGN",
         photo: { src: "/images/registry-experience.jpg", alt: "Spa essentials and warm towels" },
@@ -301,7 +301,7 @@ export const weddingContent: WeddingContent = {
         name: "Bless Us As You Are Led",
         category: "cash",
         description:
-          "No amount, no expectation. If you would prefer to give cash, transfer to the account below — we receive it with both hands.",
+          "No amount, no expectation. If you would prefer to give cash, transfer to the account below. We receive it with both hands.",
         currency: "NGN",
         photo: { src: "/images/registry-cash.jpg", alt: "A gold envelope resting on ivory paper" },
         isContribution: true,
@@ -321,7 +321,7 @@ export const weddingContent: WeddingContent = {
       id: "faq-venue",
       question: "Where is the venue?",
       answer:
-        "Both the traditional wedding and reception take place in Lagos on December 3rd, 2026. Full venue addresses will be shared closer to the date — each event card has a “Get Directions” button when details are confirmed.",
+        "Both the traditional wedding and reception take place in Lagos on December 3rd, 2026. Full venue addresses will be shared closer to the date. Each event card has a “Get Directions” button when details are confirmed.",
       link: { label: "View wedding details", href: "#wedding" },
     },
     {
@@ -360,7 +360,7 @@ export const weddingContent: WeddingContent = {
     {
       id: "faq-photos",
       question: "Can I share photos online?",
-      answer: "Please do — tag everything #LOVETV so we can find them.",
+      answer: "Please do! Tag everything #LOVETV so we can find them.",
     },
   ],
 
@@ -386,7 +386,7 @@ export const weddingContent: WeddingContent = {
         { name: "Caramel", hex: "#b8956a" },
         { name: "Black", hex: "#1d1916" },
       ],
-      avoid: "Please avoid full white — reserved for the bride.",
+      avoid: "Please avoid full white. That's reserved for the bride.",
       photo: { src: "/images/dress-traditional.jpg", alt: "Blush and caramel traditional attire" },
     },
     {
@@ -414,6 +414,14 @@ export const weddingContent: WeddingContent = {
       phone: "+234 800 000 0000",
       whatsapp: "2348000000000",
       email: "hello@lovetv.wedding",
+    },
+    {
+      id: "contact-funmilayo",
+      name: "Funmilayo",
+      role: "Aso Ebi & Guest Help",
+      phone: "+234 907 559 2973",
+      whatsapp: "2349075592973",
+      email: "asoebi@lovetv.wedding",
     },
   ],
 

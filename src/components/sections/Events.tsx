@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
-import { RevealGroup, RevealItem } from "@/components/ui/Reveal";
+import { Reveal, RevealGroup, RevealItem } from "@/components/ui/Reveal";
 import { Section } from "@/components/ui/Section";
 import { SmartImage } from "@/components/ui/SmartImage";
 import {
@@ -79,14 +79,22 @@ function CalendarMenu({ event, coupleNames }: { event: WeddingEvent; coupleNames
   );
 }
 
-function EventCard({ event, couple }: { event: WeddingEvent; couple: Couple }) {
+function EventCard({
+  event,
+  couple,
+  step,
+}: {
+  event: WeddingEvent;
+  couple: Couple;
+  step: number;
+}) {
   return (
-    <article className="group flex h-full flex-col overflow-hidden rounded-[1.25rem] border border-ink/8 bg-ivory shadow-[0_20px_50px_-38px_rgba(29,25,22,0.55)] transition-shadow duration-700 hover:shadow-[0_34px_70px_-40px_rgba(29,25,22,0.6)]">
+    <article className="group relative flex h-full flex-col overflow-hidden rounded-[1.25rem] border border-ink/8 bg-ivory shadow-[0_20px_50px_-38px_rgba(29,25,22,0.55)] transition-shadow duration-700 hover:shadow-[0_34px_70px_-40px_rgba(29,25,22,0.6)]">
       <div className="relative">
         <SmartImage
           photo={event.photo ?? { src: "", alt: event.name }}
           monogram={couple.monogram}
-          sizes="(max-width: 768px) 100vw, 33vw"
+          sizes="(max-width: 1024px) 100vw, 50vw"
           className="aspect-[16/10] w-full"
         />
         <span
@@ -94,13 +102,31 @@ function EventCard({ event, couple }: { event: WeddingEvent; couple: Couple }) {
           style={{ backgroundColor: event.accentColor }}
           aria-hidden
         />
+        <span
+          className="absolute left-4 top-4 inline-flex h-9 w-9 items-center justify-center rounded-full bg-ivory/95 font-display text-[1rem] text-ink shadow-sm backdrop-blur-sm"
+          aria-hidden
+        >
+          {step}
+        </span>
       </div>
 
       <div className="flex flex-1 flex-col p-6 sm:p-7">
-        <p className="eyebrow" style={{ color: event.accentColor }}>
-          {event.subtitle}
-        </p>
-        <h3 className="mt-3 text-[1.7rem] leading-tight">{event.name}</h3>
+        <div className="flex flex-wrap items-start justify-between gap-3">
+          <div>
+            <p className="eyebrow" style={{ color: event.accentColor }}>
+              {event.subtitle}
+            </p>
+            <h3 className="mt-2 text-[1.7rem] leading-tight">{event.name}</h3>
+          </div>
+          <span
+            className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-ink/10 bg-champagne/40 px-3 py-1.5 font-sans text-[0.58rem] uppercase tracking-[0.18em] text-ink-soft"
+            style={{ borderColor: `${event.accentColor}33` }}
+          >
+            <ClockIcon width={13} height={13} style={{ color: event.accentColor }} />
+            {event.displayTime}
+          </span>
+        </div>
+
         <p className="mt-3 text-[0.92rem] leading-[1.8] text-ink-soft">{event.description}</p>
 
         <dl className="mt-6 space-y-3.5 border-t border-ink/8 pt-5 text-[0.86rem]">
@@ -110,13 +136,6 @@ function EventCard({ event, couple }: { event: WeddingEvent; couple: Couple }) {
               <span className="sr-only">Date</span>
             </dt>
             <dd className="text-ink">{event.displayDate}</dd>
-          </div>
-          <div className="flex gap-3">
-            <dt className="mt-0.5 shrink-0 text-gold">
-              <ClockIcon width={16} height={16} />
-              <span className="sr-only">Time</span>
-            </dt>
-            <dd className="text-ink">{event.displayTime}</dd>
           </div>
           <div className="flex gap-3">
             <dt className="mt-0.5 shrink-0 text-gold">
@@ -166,19 +185,56 @@ function EventCard({ event, couple }: { event: WeddingEvent; couple: Couple }) {
 }
 
 export function Events({ events, couple }: { events: WeddingEvent[]; couple: Couple }) {
+  const dayLabel = events[0]?.displayDate ?? "Wedding day";
+  const locationLabel = events[0]?.address ?? "Lagos, Nigeria";
+
   return (
     <Section
       id="wedding"
       eyebrow="The Celebration"
       title="Wedding Details"
-      intro="Two days, three gatherings, one very happy family. Everything happens in Lagos — tap any card for directions or to save the date to your phone."
+      intro="One beautiful day in Lagos, with a traditional ceremony in the morning and dinner and dancing into the night. Save both to your calendar or tap for directions."
     >
-      <RevealGroup className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-7">
-        {events.map((event) => (
-          <RevealItem key={event.id} className="h-full">
-            <EventCard event={event} couple={couple} />
-          </RevealItem>
-        ))}
+      <Reveal className="mx-auto mb-10 flex max-w-3xl justify-center sm:mb-12">
+        <div className="inline-flex flex-wrap items-center justify-center gap-x-4 gap-y-2 rounded-full border border-ink/10 bg-champagne/30 px-6 py-3 text-center">
+          <span className="inline-flex items-center gap-2 font-sans text-[0.62rem] uppercase tracking-[0.2em] text-ink-soft">
+            <CalendarIcon width={14} height={14} className="text-gold" />
+            {dayLabel}
+          </span>
+          <span className="hidden h-3 w-px bg-ink/15 sm:block" aria-hidden />
+          <span className="inline-flex items-center gap-2 font-sans text-[0.62rem] uppercase tracking-[0.2em] text-ink-soft">
+            <MapPinIcon width={14} height={14} className="text-gold" />
+            {locationLabel}
+          </span>
+        </div>
+      </Reveal>
+
+      <RevealGroup className="relative mx-auto max-w-5xl">
+        <div
+          className="pointer-events-none absolute left-1/2 top-8 hidden h-[calc(100%-4rem)] w-px -translate-x-1/2 bg-gradient-to-b from-gold/10 via-gold/35 to-gold/10 lg:block"
+          aria-hidden
+        />
+
+        <div className="grid gap-8 lg:grid-cols-2 lg:gap-10">
+          {events.map((event, index) => (
+            <RevealItem key={event.id} className="relative h-full">
+              {index === 0 ? (
+                <span
+                  className="pointer-events-none absolute -right-5 top-1/2 z-10 hidden h-3 w-3 -translate-y-1/2 rounded-full border-2 border-ivory bg-gold lg:block"
+                  aria-hidden
+                />
+              ) : null}
+              {index === 1 ? (
+                <span
+                  className="pointer-events-none absolute -left-5 top-1/2 z-10 hidden h-3 w-3 -translate-y-1/2 rounded-full border-2 border-ivory bg-gold lg:block"
+                  aria-hidden
+                />
+              ) : null}
+
+              <EventCard event={event} couple={couple} step={index + 1} />
+            </RevealItem>
+          ))}
+        </div>
       </RevealGroup>
     </Section>
   );

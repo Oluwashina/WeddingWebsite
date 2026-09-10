@@ -206,16 +206,24 @@ export function Navbar({ couple, meta }: { couple: Couple; meta: WeddingMeta }) 
                   </motion.button>
                 ))}
 
-                <motion.button
-                  type="button"
-                  onClick={() => go("rsvp")}
-                  className="mt-8 inline-flex min-h-[54px] w-full items-center justify-center rounded-full bg-gold px-8 font-sans text-[0.7rem] uppercase tracking-[0.26em] text-ink"
+                <motion.div
+                  className="mt-8 flex w-full items-center justify-center gap-4"
                   initial={{ opacity: 0, y: 18 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                  transition={{ duration: 0.5, delay: 0.45, ease: [0.22, 1, 0.36, 1] }}
                 >
-                  RSVP Now
-                </motion.button>
+                  <ShareButton
+                    meta={meta}
+                    className="text-ivory/80 hover:text-gold-light"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => go("rsvp")}
+                    className="inline-flex min-h-[54px] flex-1 items-center justify-center rounded-full bg-gold px-8 font-sans text-[0.7rem] uppercase tracking-[0.26em] text-ink"
+                  >
+                    RSVP Now
+                  </button>
+                </motion.div>
               </nav>
             </div>
           </motion.div>

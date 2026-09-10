@@ -69,11 +69,12 @@ export function ButtonLink({
   const classes = cn(base, variants[variant], sizes[size], fullWidth && "w-full", className);
 
   if (external || href.startsWith("http") || href.startsWith("mailto:") || href.startsWith("tel:")) {
+    const isWhatsApp = href.includes("wa.me") || href.includes("whatsapp.com");
     return (
       <a
         href={href}
         className={classes}
-        target={href.startsWith("http") ? "_blank" : undefined}
+        target={isWhatsApp ? undefined : href.startsWith("http") ? "_blank" : undefined}
         rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
         {...props}
       >

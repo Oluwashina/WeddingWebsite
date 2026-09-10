@@ -34,7 +34,7 @@ function tierRangeLabel(option: AsoEbiOption): string {
   const min = Math.min(...prices);
   const max = Math.max(...prices);
   if (min === max) return formatMoney(min, option.currency);
-  return `${formatMoney(min, option.currency)} – ${formatMoney(max, option.currency)}`;
+  return `${formatMoney(min, option.currency)} to ${formatMoney(max, option.currency)}`;
 }
 
 export function AsoEbi({ asoEbi, couple }: AsoEbiProps) {

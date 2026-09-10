@@ -10,6 +10,7 @@ import {
 import { Confetti } from "@/components/ui/Confetti";
 import { Petals } from "@/components/ui/Petals";
 import { Ornament } from "@/components/ui/Ornament";
+import { useMusic } from "@/components/layout/MusicProvider";
 import { useLockBodyScroll } from "@/lib/hooks";
 import type { Couple, WeddingMeta } from "@/lib/types";
 
@@ -27,6 +28,7 @@ export function InvitationGate({ couple, meta, children }: InvitationGateProps) 
   const [justOpened, setJustOpened] = useState(false);
   const timers = useRef<number[]>([]);
   const reduceMotion = useReducedMotion();
+  const music = useMusic();
 
   const isRevealed = phase === "revealed";
   useLockBodyScroll(!isRevealed);
@@ -58,6 +60,7 @@ export function InvitationGate({ couple, meta, children }: InvitationGateProps) 
   }, []);
 
   const open = useCallback(() => {
+    void music?.playFromGesture();
     setPhase((current) => {
       if (current !== "sealed") return current;
       if (reduceMotion) {
@@ -68,13 +71,14 @@ export function InvitationGate({ couple, meta, children }: InvitationGateProps) 
       timers.current.push(window.setTimeout(() => finish(true), 4200));
       return "opening";
     });
-  }, [finish, reduceMotion]);
+  }, [finish, music, reduceMotion]);
 
   const skip = useCallback(() => {
+    void music?.playFromGesture();
     timers.current.forEach((id) => window.clearTimeout(id));
     timers.current = [];
     finish(false);
-  }, [finish]);
+  }, [finish, music]);
 
   const value = useMemo(
     () => ({ phase, isRevealed, open, skip, justOpened }),

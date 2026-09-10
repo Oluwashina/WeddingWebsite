@@ -12,7 +12,7 @@ export function DressCode({ looks, couple }: { looks: DressCodeLook[]; couple: C
       tone="deep"
       eyebrow="Dress Code"
       title="What To Wear"
-      intro="A gentle steer, not a rulebook. Come as yourself — just in these colours."
+      intro="A gentle steer, not a rulebook. Come as yourself, just in these colours."
     >
       <RevealGroup className="grid gap-8 lg:grid-cols-2 lg:gap-10">
         {looks.map((look) => (
