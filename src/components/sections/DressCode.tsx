@@ -1,63 +1,66 @@
 "use client";
 
-import { RevealGroup, RevealItem } from "@/components/ui/Reveal";
+import { Reveal } from "@/components/ui/Reveal";
 import { Section } from "@/components/ui/Section";
 import { SmartImage } from "@/components/ui/SmartImage";
-import type { Couple, DressCodeLook } from "@/lib/types";
+import type { Couple, DressCodeContent } from "@/lib/types";
 
-export function DressCode({ looks, couple }: { looks: DressCodeLook[]; couple: Couple }) {
+export function DressCode({
+  dressCode,
+  couple,
+}: {
+  dressCode: DressCodeContent;
+  couple: Couple;
+}) {
   return (
     <Section
       id="dress-code"
       tone="deep"
       eyebrow="Dress Code"
       title="What To Wear"
-      intro="A gentle steer, not a rulebook. Come as yourself, just in these colours."
+      intro={dressCode.intro}
     >
-      <RevealGroup className="grid gap-8 lg:grid-cols-2 lg:gap-10">
-        {looks.map((look) => (
-          <RevealItem key={look.id} className="h-full">
-            <article className="group flex h-full flex-col overflow-hidden rounded-[1.35rem] border border-ivory/12 bg-ivory/5">
+      <Reveal className="mx-auto max-w-4xl">
+        <article className="overflow-hidden rounded-[1.35rem] border border-ivory/12 bg-ivory/5">
+          <div className="grid lg:grid-cols-[1.05fr_1fr]">
+            {dressCode.photo ? (
               <SmartImage
-                photo={look.photo ?? { src: "", alt: look.title }}
+                photo={dressCode.photo}
                 monogram={couple.monogram}
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="aspect-[16/11] w-full"
+                sizes="(max-width: 1024px) 100vw, 40vw"
+                className="aspect-[4/3] w-full lg:aspect-auto lg:min-h-full"
               />
+            ) : null}
 
-              <div className="flex flex-1 flex-col p-6 sm:p-8">
-                <p className="eyebrow text-gold-light">{look.eventName}</p>
-                <h3 className="mt-3 text-[1.75rem] leading-tight text-ivory">{look.title}</h3>
-                <p className="mt-4 text-[0.94rem] leading-[1.85] text-ivory/72">{look.guidance}</p>
+            <div className="flex flex-col justify-center p-8 sm:p-10 lg:p-12">
+              <h3 className="font-display text-[2.15rem] leading-[1.12] text-ivory sm:text-[2.6rem]">
+                {dressCode.colors}
+              </h3>
 
-                <div className="mt-7">
-                  <p className="font-sans text-[0.56rem] uppercase tracking-[0.28em] text-ivory/45">
-                    The palette
-                  </p>
-                  <div className="mt-4 flex flex-wrap gap-4">
-                    {look.palette.map((swatch) => (
-                      <div key={swatch.hex} className="flex flex-col items-center gap-2">
-                        <span
-                          className="h-14 w-14 rounded-full border border-ivory/25 shadow-[inset_0_2px_6px_rgba(255,255,255,0.18)] transition-transform duration-500 group-hover:scale-105"
-                          style={{ backgroundColor: swatch.hex }}
-                          aria-hidden
-                        />
-                        <span className="font-sans text-[0.58rem] uppercase tracking-[0.16em] text-ivory/55">
-                          {swatch.name}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                <p className="mt-auto pt-7 text-[0.82rem] italic leading-relaxed text-gold-light/85">
-                  {look.avoid}
+              {dressCode.note ? (
+                <p className="mt-5 max-w-md text-[0.94rem] leading-[1.85] text-ivory/72">
+                  {dressCode.note}
                 </p>
+              ) : null}
+
+              <div className="mt-9 flex flex-wrap gap-8 sm:gap-10">
+                {dressCode.palette.map((swatch) => (
+                  <div key={swatch.hex} className="flex flex-col items-center gap-3">
+                    <span
+                      className="h-[4.5rem] w-[4.5rem] rounded-full border-2 border-ivory/30 shadow-[0_8px_24px_-8px_rgba(0,0,0,0.45)] sm:h-20 sm:w-20"
+                      style={{ backgroundColor: swatch.hex }}
+                      aria-hidden
+                    />
+                    <span className="font-sans text-[0.62rem] uppercase tracking-[0.2em] text-ivory/60">
+                      {swatch.name}
+                    </span>
+                  </div>
+                ))}
               </div>
-            </article>
-          </RevealItem>
-        ))}
-      </RevealGroup>
+            </div>
+          </div>
+        </article>
+      </Reveal>
     </Section>
   );
 }

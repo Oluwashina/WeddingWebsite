@@ -45,7 +45,7 @@ export const weddingContent: WeddingContent = {
     id: "wedding-2026",
     startsAt: "2026-12-03T11:00:00+01:00",
     displayDate: "December 3rd, 2026",
-    displayLocation: "Lagos, Nigeria",
+    displayLocation: "Ojodu Berger, Lagos",
     city: "Lagos",
     country: "Nigeria",
     timezone: "Africa/Lagos",
@@ -72,10 +72,9 @@ export const weddingContent: WeddingContent = {
       endsAt: "2026-12-03T13:00:00+01:00",
       displayDate: "Thursday, 3 December 2026",
       displayTime: "11:00 AM to 1:00 PM",
-      venue: "Venue details coming soon",
-      address: "Lagos, Nigeria",
-      mapsQuery: "Lagos, Nigeria",
-      dressCode: "Aso Ebi or Nigerian traditional attire in blush pink tones",
+      venue: "Canaanland Event Centre",
+      address: "10, Limson Road, Ojodu Berger, Lagos.",
+      mapsQuery: "Canaanland Event Centre, 10 Limson Road, Ojodu Berger, Lagos",
       accentColor: "#c97885",
       photo: {
         src: "/images/event-traditional.jpg",
@@ -93,11 +92,10 @@ export const weddingContent: WeddingContent = {
       startsAt: "2026-12-03T14:00:00+01:00",
       endsAt: "2026-12-03T22:00:00+01:00",
       displayDate: "Thursday, 3 December 2026",
-      displayTime: "2:00 PM to 10:00 PM",
-      venue: "Venue details coming soon",
-      address: "Lagos, Nigeria",
-      mapsQuery: "Lagos, Nigeria",
-      dressCode: "Cocktail glamour in blush, caramel and black",
+      displayTime: "2:00 PM",
+      venue: "Canaanland Event Centre",
+      address: "10, Limson Road, Ojodu Berger, Lagos.",
+      mapsQuery: "Canaanland Event Centre, 10 Limson Road, Ojodu Berger, Lagos",
       accentColor: "#b8956a",
       photo: {
         src: "/images/event-reception.jpg",
@@ -175,7 +173,6 @@ export const weddingContent: WeddingContent = {
       role: "Aso Ebi Coordinator",
       phone: "+234 907 559 2973",
       whatsapp: "2349075592973",
-      email: "asoebi@lovetv.wedding",
     },
     options: [
       {
@@ -314,14 +311,14 @@ export const weddingContent: WeddingContent = {
       id: "faq-wear",
       question: "What should I wear?",
       answer:
-        "Traditional wedding: Aso Ebi if you ordered it, otherwise Nigerian traditional attire in blush pink, caramel or black. Reception: cocktail glamour in the same palette. Please leave full white for the bride.",
+        "Blush pink or caramel. Aso Ebi is welcome if you ordered it, but never required.",
       link: { label: "See the dress code", href: "#dress-code" },
     },
     {
       id: "faq-venue",
       question: "Where is the venue?",
       answer:
-        "Both the traditional wedding and reception take place in Lagos on December 3rd, 2026. Full venue addresses will be shared closer to the date. Each event card has a “Get Directions” button when details are confirmed.",
+        "Both the traditional wedding and reception take place at Canaanland Event Centre, 10 Limson Road, Ojodu Berger, Lagos on December 3rd, 2026. Tap “Get Directions” on any event card for Google Maps.",
       link: { label: "View wedding details", href: "#wedding" },
     },
     {
@@ -373,55 +370,32 @@ export const weddingContent: WeddingContent = {
     { src: "/images/gallery-08.jpg", alt: "Behind the scenes", caption: "Behind the scenes" },
   ],
 
-  dressCode: [
-    {
-      id: "dress-traditional",
-      eventName: "Traditional Wedding",
-      title: "Blush & Caramel",
-      guidance:
-        "Nigerian traditional attire. Ladies in George, lace or Ankara with a gele; gentlemen in agbada, kaftan or senator. Aso Ebi is welcome but never required.",
-      palette: [
-        { name: "Blush", hex: "#e8a4ad" },
-        { name: "Blush Light", hex: "#f5dde1" },
-        { name: "Caramel", hex: "#b8956a" },
-        { name: "Black", hex: "#1d1916" },
-      ],
-      avoid: "Please avoid full white. That's reserved for the bride.",
-      photo: { src: "/images/dress-traditional.jpg", alt: "Blush and caramel traditional attire" },
-    },
-    {
-      id: "dress-reception",
-      eventName: "Reception",
-      title: "Cocktail Glamour",
-      guidance:
-        "Formal or cocktail wear in blush, caramel, ivory or black. Bring shoes you can dance in.",
-      palette: [
-        { name: "Ivory", hex: "#f4ede1" },
-        { name: "Blush", hex: "#e8a4ad" },
-        { name: "Caramel", hex: "#b8956a" },
-        { name: "Black", hex: "#1d1916" },
-      ],
-      avoid: "Please avoid full white head-to-toe.",
-      photo: { src: "/images/dress-white.jpg", alt: "Elegant reception attire" },
-    },
-  ],
+  dressCode: {
+    id: "dress-code-2026",
+    intro: "Come as yourself. These are the colours of the day.",
+    colors: "Blush pink or caramel",
+    note: "Traditional, formal, or cocktail, whatever you feel best in. Aso Ebi is welcome if you ordered it.",
+    palette: [
+      { name: "Blush pink", hex: "#e8a4ad" },
+      { name: "Caramel", hex: "#b8956a" },
+    ],
+    photo: { src: "/images/dress-code.jpg", alt: "Guests in blush pink and caramel wedding attire" },
+  },
 
   contacts: [
     {
-      id: "contact-primary",
-      name: "Wedding Coordinator",
+      id: "contact-esther",
+      name: "Esther",
       role: "Guest Support",
-      phone: "+234 800 000 0000",
-      whatsapp: "2348000000000",
-      email: "hello@lovetv.wedding",
+      phone: "+234 903 254 3184",
+      whatsapp: "2349032543184",
     },
     {
       id: "contact-funmilayo",
       name: "Funmilayo",
-      role: "Aso Ebi & Guest Help",
+      role: "Aso Ebi",
       phone: "+234 907 559 2973",
       whatsapp: "2349075592973",
-      email: "asoebi@lovetv.wedding",
     },
   ],
 

@@ -8,12 +8,17 @@ function escapeIcsText(value: string): string {
   return value.replace(/\\/g, "\\\\").replace(/;/g, "\\;").replace(/,/g, "\\,").replace(/\n/g, "\\n");
 }
 
+function eventDetails(event: WeddingEvent): string {
+  if (!event.dressCode) return event.description;
+  return `${event.description}\n\nDress code: ${event.dressCode}`;
+}
+
 export function googleCalendarUrl(event: WeddingEvent, coupleNames: string): string {
   const params = new URLSearchParams({
     action: "TEMPLATE",
     text: `${coupleNames}: ${event.name}`,
     dates: `${toUtcStamp(event.startsAt)}/${toUtcStamp(event.endsAt)}`,
-    details: `${event.description}\n\nDress code: ${event.dressCode}`,
+    details: eventDetails(event),
     location: `${event.venue}, ${event.address}`,
   });
   return `https://calendar.google.com/calendar/render?${params.toString()}`;
@@ -31,7 +36,7 @@ export function buildIcs(event: WeddingEvent, coupleNames: string): string {
     `DTSTART:${toUtcStamp(event.startsAt)}`,
     `DTEND:${toUtcStamp(event.endsAt)}`,
     `SUMMARY:${escapeIcsText(`${coupleNames}: ${event.name}`)}`,
-    `DESCRIPTION:${escapeIcsText(`${event.description}\nDress code: ${event.dressCode}`)}`,
+    `DESCRIPTION:${escapeIcsText(eventDetails(event))}`,
     `LOCATION:${escapeIcsText(`${event.venue}, ${event.address}`)}`,
     "BEGIN:VALARM",
     "TRIGGER:-P1D",

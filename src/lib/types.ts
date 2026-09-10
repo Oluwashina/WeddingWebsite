@@ -81,7 +81,7 @@ export interface WeddingEvent {
   address: string;
   /** Used to build the Google/Apple Maps deep link. */
   mapsQuery: string;
-  dressCode: string;
+  dressCode?: string;
   accentColor: string;
   photo?: Photo;
   notes?: string[];
@@ -170,13 +170,13 @@ export interface FaqItem {
   link?: { label: string; href: string };
 }
 
-export interface DressCodeLook {
+export interface DressCodeContent {
   id: Id;
-  eventName: string;
-  title: string;
-  guidance: string;
+  intro: string;
+  /** Main colour steer, e.g. "Blush pink or caramel". */
+  colors: string;
+  note?: string;
   palette: { name: string; hex: string }[];
-  avoid: string;
   photo?: Photo;
 }
 
@@ -205,7 +205,7 @@ export interface WeddingContent {
   registry: Registry;
   faqs: FaqItem[];
   gallery: Photo[];
-  dressCode: DressCodeLook[];
+  dressCode: DressCodeContent;
   contacts: Contact[];
   socials: SocialLink[];
 }

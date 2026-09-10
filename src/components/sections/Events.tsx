@@ -147,13 +147,15 @@ function EventCard({
               <span className="block text-ink-muted">{event.address}</span>
             </dd>
           </div>
-          <div className="flex gap-3">
-            <dt className="mt-0.5 shrink-0 text-gold">
-              <SparkIcon width={16} height={16} />
-              <span className="sr-only">Dress code</span>
-            </dt>
-            <dd className="text-ink-soft">{event.dressCode}</dd>
-          </div>
+          {event.dressCode ? (
+            <div className="flex gap-3">
+              <dt className="mt-0.5 shrink-0 text-gold">
+                <SparkIcon width={16} height={16} />
+                <span className="sr-only">Dress code</span>
+              </dt>
+              <dd className="text-ink-soft">{event.dressCode}</dd>
+            </div>
+          ) : null}
         </dl>
 
         {event.notes?.length ? (

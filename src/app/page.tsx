@@ -32,7 +32,7 @@ export default async function HomePage() {
           <Events events={events} couple={couple} />
           <Rsvp couple={couple} meta={meta} events={events} contact={contacts[0]} />
           <AsoEbi asoEbi={asoEbi} couple={couple} />
-          <DressCode looks={dressCode} couple={couple} />
+          <DressCode dressCode={dressCode} couple={couple} />
           <Gallery photos={gallery} couple={couple} />
           <Registry registry={registry} couple={couple} contact={contacts[0]} />
           <Faq faqs={faqs} />
