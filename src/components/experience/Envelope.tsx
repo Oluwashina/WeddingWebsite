@@ -1,11 +1,14 @@
 "use client";
 
+import Image from "next/image";
 import { motion, useReducedMotion } from "motion/react";
 import type { InvitationPhase } from "@/components/experience/InvitationContext";
+import type { Photo } from "@/lib/types";
 
 interface EnvelopeProps {
   phase: InvitationPhase;
   monogram: string;
+  seal?: Photo;
   names: string;
   displayDate: string;
   location: string;
@@ -22,6 +25,7 @@ const silk = [0.22, 1, 0.36, 1] as const;
 export function Envelope({
   phase,
   monogram,
+  seal,
   names,
   displayDate,
   location,
@@ -48,7 +52,7 @@ export function Envelope({
       >
         {/* Back panel + inner liner */}
         <div className="absolute inset-0 rounded-[0.55rem] bg-[linear-gradient(160deg,#efe4d2,#e3d4bd)] shadow-[0_30px_70px_-30px_rgba(20,16,12,0.75)]">
-          <div className="absolute inset-[3px] rounded-[0.45rem] bg-[linear-gradient(180deg,#1f3a32,#16281f)] opacity-95" />
+          <div className="absolute inset-[3px] rounded-[0.45rem] bg-[linear-gradient(180deg,#e8a4ad,#c97885)] opacity-95" />
         </div>
 
         {/* Invitation card */}
@@ -131,7 +135,7 @@ export function Envelope({
           />
           {/* Reverse side (visible once the flap has swung open) */}
           <div
-            className="absolute inset-0 bg-[linear-gradient(0deg,#26433a,#1a3129)]"
+            className="absolute inset-0 bg-[linear-gradient(0deg,#d4929c,#c97885)]"
             style={{
               clipPath: "polygon(0 0, 100% 0, 50% 100%)",
               transform: "rotateX(180deg)",
@@ -172,9 +176,19 @@ export function Envelope({
               aria-hidden
             />
           ) : null}
-          <span className="relative font-display text-[1.35rem] tracking-tight text-[#fdf6e8] drop-shadow-[0_1px_1px_rgba(80,52,20,0.7)]">
-            {monogram}
-          </span>
+          {seal ? (
+            <Image
+              src={seal.src}
+              alt={seal.alt}
+              width={56}
+              height={56}
+              className="relative h-[3.1rem] w-[3.1rem] object-contain drop-shadow-[0_2px_4px_rgba(80,52,20,0.35)]"
+            />
+          ) : (
+            <span className="relative font-display text-[1.35rem] tracking-tight text-[#fdf6e8] drop-shadow-[0_1px_1px_rgba(80,52,20,0.7)]">
+              {monogram}
+            </span>
+          )}
         </motion.button>
       </motion.div>
     </div>

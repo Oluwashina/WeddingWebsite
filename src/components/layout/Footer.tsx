@@ -16,8 +16,8 @@ export function Footer({
   socials: SocialLink[];
 }) {
   return (
-    <footer className="relative overflow-hidden bg-[linear-gradient(180deg,#1a2f28,#12211b)] pb-[calc(env(safe-area-inset-bottom)+6.5rem)] pt-20 text-ivory lg:pb-16 lg:pt-28">
-      <Petals count={8} opacity={0.22} palette={["#d6bd8e", "#b0894e"]} />
+    <footer className="relative overflow-hidden bg-[linear-gradient(180deg,#c97885,#a85f6a)] pb-[calc(env(safe-area-inset-bottom)+6.5rem)] pt-20 text-ivory lg:pb-16 lg:pt-28">
+      <Petals count={8} opacity={0.22} palette={["#f5dde1", "#d4b896"]} />
 
       <div className="container-page relative flex flex-col items-center text-center">
         <Reveal className="flex flex-col items-center">

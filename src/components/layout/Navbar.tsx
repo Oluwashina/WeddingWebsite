@@ -1,6 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "motion/react";
+import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
 import { useInvitation } from "@/components/experience/InvitationContext";
 import { ShareButton } from "@/components/layout/ShareButton";
@@ -20,12 +21,40 @@ const NAV_ITEMS = [
 ];
 
 const DESKTOP_ITEMS = NAV_ITEMS.filter((item) => item.id !== "home");
-const SPY_IDS = [...NAV_ITEMS.map((item) => item.id), "rsvp", "dress-code", "contact"];
+/** Must follow the order sections appear on the page (see `page.tsx`). */
+const SPY_IDS = [
+  "home",
+  "story",
+  "wedding",
+  "rsvp",
+  "aso-ebi",
+  "dress-code",
+  "gallery",
+  "registry",
+  "faq",
+  "contact",
+];
+
+/** Map in-page-only sections to the nav link that should stay underlined. */
+function navHighlightId(active: string | null): string | null {
+  if (!active) return null;
+  if (NAV_ITEMS.some((item) => item.id === active)) return active;
+
+  const idx = SPY_IDS.indexOf(active);
+  if (idx === -1) return active;
+
+  for (let i = idx; i >= 0; i -= 1) {
+    const candidate = SPY_IDS[i];
+    if (NAV_ITEMS.some((item) => item.id === candidate)) return candidate;
+  }
+  return active;
+}
 
 export function Navbar({ couple, meta }: { couple: Couple; meta: WeddingMeta }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const scrolled = useScrolled(40);
-  const active = useScrollSpy(SPY_IDS);
+  const activeSection = useScrollSpy(SPY_IDS);
+  const active = navHighlightId(activeSection);
   const { isRevealed } = useInvitation();
 
   useLockBodyScroll(menuOpen);
@@ -63,7 +92,18 @@ export function Navbar({ couple, meta }: { couple: Couple; meta: WeddingMeta }) 
             )}
             aria-label="Back to top"
           >
-            <span className="font-display text-xl tracking-tight">{couple.monogram}</span>
+            {couple.logo ? (
+              <Image
+                src={couple.logo.src}
+                alt={couple.logo.alt}
+                width={120}
+                height={40}
+                className="h-8 w-auto object-contain sm:h-9"
+                priority
+              />
+            ) : (
+              <span className="font-display text-xl tracking-tight">{couple.monogram}</span>
+            )}
             <span className="hidden font-sans text-[0.58rem] uppercase tracking-[0.32em] text-ink-muted sm:inline">
               {couple.shortNames}
             </span>
@@ -117,7 +157,7 @@ export function Navbar({ couple, meta }: { couple: Couple; meta: WeddingMeta }) 
       <AnimatePresence>
         {menuOpen ? (
           <motion.div
-            className="fixed inset-0 z-[70] bg-[linear-gradient(170deg,#1f3a32,#14231d)] lg:hidden"
+            className="fixed inset-0 z-[70] bg-[linear-gradient(170deg,#c97885,#a85f6a)] lg:hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -125,7 +165,17 @@ export function Navbar({ couple, meta }: { couple: Couple; meta: WeddingMeta }) 
           >
             <div className="container-page flex h-[100svh] flex-col">
               <div className="flex h-[var(--nav-height)] items-center justify-between">
-                <span className="font-display text-xl text-ivory">{couple.monogram}</span>
+                {couple.logo ? (
+                  <Image
+                    src={couple.logo.src}
+                    alt={couple.logo.alt}
+                    width={120}
+                    height={40}
+                    className="h-8 w-auto object-contain brightness-0 invert"
+                  />
+                ) : (
+                  <span className="font-display text-xl text-ivory">{couple.monogram}</span>
+                )}
                 <button
                   type="button"
                   onClick={() => setMenuOpen(false)}

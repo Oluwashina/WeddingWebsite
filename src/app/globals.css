@@ -1,19 +1,23 @@
 @import "tailwindcss";
 
 @theme {
-  /* Palette — warm ivory, ink, burnished gold, deep forest, clay */
+  /* Palette — ivory, ink, blush pink, caramel */
   --color-ivory: #fbf7f1;
   --color-ivory-deep: #f4ede1;
-  --color-champagne: #eaddc7;
-  --color-sand: #ddcdb4;
+  --color-champagne: #f0e0d4;
+  --color-sand: #e8d5c8;
   --color-ink: #1d1916;
   --color-ink-soft: #4b433a;
   --color-ink-muted: #7d7267;
-  --color-gold: #b0894e;
-  --color-gold-light: #d6bd8e;
-  --color-forest: #1f3a32;
-  --color-forest-light: #33564b;
-  --color-clay: #a85c3e;
+  --color-gold: #b8956a;
+  --color-gold-light: #d4b896;
+  --color-blush: #e8a4ad;
+  --color-blush-deep: #c97885;
+  --color-blush-light: #f5dde1;
+  /* Aliases — existing components use forest for the deep accent sections */
+  --color-forest: #c97885;
+  --color-forest-light: #e8a4ad;
+  --color-clay: #a86b5a;
 
   --font-display: var(--font-cormorant), "Cormorant Garamond", ui-serif, Georgia, serif;
   --font-sans: var(--font-jost), "Jost", ui-sans-serif, system-ui, sans-serif;

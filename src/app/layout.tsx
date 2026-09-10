@@ -20,8 +20,8 @@ const jost = Jost({
 
 export async function generateMetadata(): Promise<Metadata> {
   const { couple, meta } = await getWeddingContent();
-  const title = `${couple.shortNames} — ${meta.displayDate}`;
-  const description = `${couple.brideFullName} and ${couple.groomFullName} are getting married in ${meta.displayLocation}. Open your invitation, RSVP and find everything you need for the day.`;
+  const title = `${couple.hashtag} — ${couple.shortNames}`;
+  const description = `Tune in to ${couple.hashtag}. ${couple.shortNames} are getting married on ${meta.displayDate} in ${meta.displayLocation}. Open your invitation, RSVP, and find everything you need for the day.`;
 
   return {
     metadataBase: new URL(meta.siteUrl),

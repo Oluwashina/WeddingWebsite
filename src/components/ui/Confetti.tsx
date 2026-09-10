@@ -24,7 +24,7 @@ interface Particle {
 }
 
 /* Champagne, gold and ivory only — coloured confetti reads as party-shop. */
-const COLORS = ["#c9a86a", "#d6bd8e", "#eaddc7", "#f4ede1", "#b0894e"];
+const COLORS = ["#e8a4ad", "#f5dde1", "#d4b896", "#f4ede1", "#c97885"];
 
 /**
  * A restrained confetti burst — slim gold ribbons and petals falling with

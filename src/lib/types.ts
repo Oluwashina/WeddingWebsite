@@ -25,7 +25,7 @@ export interface Couple {
   brideFullName: string;
   groomFirstName: string;
   groomFullName: string;
-  /** "Ada & Tobi" — used in nav, footer, share sheets. */
+  /** "Temitope & Victor" — used in nav, footer, share sheets. */
   shortNames: string;
   monogram: string;
   hashtag: string;
@@ -33,6 +33,18 @@ export interface Couple {
   introduction: string;
   heroPhoto: Photo;
   portraitPhoto: Photo;
+  logo?: Photo;
+  seal?: Photo;
+  /** Envelope overlay eyebrow, e.g. "Tune in to". */
+  invitationEyebrow?: string;
+  /** Envelope overlay headline, e.g. "#LOVETV". */
+  invitationHeadline?: string;
+}
+
+export interface AsoEbiTier {
+  id: Id;
+  label: string;
+  price: number;
 }
 
 export interface WeddingMeta {
@@ -88,8 +100,10 @@ export interface AsoEbiOption {
   id: Id;
   name: string;
   fabric: string;
-  price: number;
+  /** Used when `tiers` is omitted. */
+  price?: number;
   currency: string;
+  tiers?: AsoEbiTier[];
   colorway: string;
   swatches: string[];
   includes: string[];
@@ -108,6 +122,8 @@ export interface AsoEbi {
   /** Set to a Paystack/Flutterwave link later to enable inline checkout. */
   checkoutUrl?: string;
   options: AsoEbiOption[];
+  showBankDetails?: boolean;
+  bankAccounts?: BankAccount[];
 }
 
 export type RegistryCategory = "home" | "travel" | "experiences" | "cash" | "other";

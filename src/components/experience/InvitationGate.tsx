@@ -89,7 +89,7 @@ export function InvitationGate({ couple, meta, children }: InvitationGateProps) 
         {!isRevealed ? (
           <motion.div
             key="envelope-overlay"
-            className="paper-grain fixed inset-0 z-[90] overflow-hidden bg-[radial-gradient(120%_100%_at_50%_0%,#224036_0%,#16261f_48%,#0f1a15_100%)]"
+            className="paper-grain fixed inset-0 z-[90] overflow-hidden bg-[radial-gradient(120%_100%_at_50%_0%,#e8a4ad_0%,#c97885_48%,#a85f6a_100%)]"
             initial={{ opacity: 1 }}
             exit={
               reduceMotion
@@ -102,7 +102,7 @@ export function InvitationGate({ couple, meta, children }: InvitationGateProps) 
                   }
             }
           >
-            <Petals count={10} opacity={0.26} palette={["#e5d0a6", "#f0e3cd", "#cdb283"]} />
+            <Petals count={10} opacity={0.28} palette={["#f5dde1", "#e8a4ad", "#d4b896"]} />
 
             <div className="relative flex h-[100svh] flex-col items-center justify-center px-6">
               <motion.div
@@ -114,21 +114,29 @@ export function InvitationGate({ couple, meta, children }: InvitationGateProps) 
                 transition={{ duration: 0.7, ease: silk }}
               >
                 <motion.p
-                  className="font-sans text-[0.6rem] uppercase tracking-[0.42em] text-gold-light/80"
+                  className="font-sans text-[0.6rem] uppercase tracking-[0.42em] text-ivory/85"
                   initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 1, delay: 0.15, ease: silk }}
                 >
-                  You&rsquo;re Invited
+                  {couple.invitationEyebrow ?? "Tune in to"}
                 </motion.p>
                 <motion.h1
-                  className="mt-4 font-display text-[2.6rem] leading-[1.02] text-ivory sm:text-[3.4rem]"
+                  className="mt-4 font-display text-[2.8rem] leading-[1.02] text-ivory sm:text-[3.6rem]"
                   initial={{ opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 1.1, delay: 0.3, ease: silk }}
                 >
-                  {couple.shortNames}
+                  {couple.invitationHeadline ?? couple.hashtag}
                 </motion.h1>
+                <motion.p
+                  className="mt-5 font-sans text-[0.68rem] uppercase tracking-[0.28em] text-ivory/75"
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 1, delay: 0.45, ease: silk }}
+                >
+                  {couple.shortNames} {couple.tagline}
+                </motion.p>
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
@@ -155,6 +163,7 @@ export function InvitationGate({ couple, meta, children }: InvitationGateProps) 
                   <Envelope
                     phase={phase}
                     monogram={couple.monogram}
+                    seal={couple.seal}
                     names={couple.shortNames}
                     displayDate={meta.displayDate}
                     location={meta.displayLocation}

@@ -51,25 +51,33 @@ export function useCountdown(targetIso: string): { value: Countdown; ready: bool
 }
 
 /**
- * Tracks which section is currently in view, for nav highlighting. The default
- * offset clears where an anchored section actually lands — `scroll-padding-top`
- * on `html` plus the sections' own `scroll-mt-24` — so tapping a nav link
- * highlights that link straight away.
+ * Tracks which section is currently in view, for nav highlighting. Sections are
+ * evaluated in **document order** so intermediate blocks (RSVP, dress code) do
+ * not steal the highlight from later nav targets like Gallery or Registry.
  */
 export function useScrollSpy(ids: string[], offset = 200): string | null {
   const [active, setActive] = useState<string | null>(ids[0] ?? null);
 
   useEffect(() => {
     const handler = () => {
-      let current: string | null = null;
-      for (const id of ids) {
+      const ordered = ids
+        .map((id) => {
+          const el = document.getElementById(id);
+          if (!el) return null;
+          return { id, top: el.offsetTop };
+        })
+        .filter((entry): entry is { id: string; top: number } => entry !== null)
+        .sort((a, b) => a.top - b.top);
+
+      let current: string | null = ordered[0]?.id ?? null;
+      for (const { id } of ordered) {
         const el = document.getElementById(id);
         if (!el) continue;
         if (el.getBoundingClientRect().top - offset <= 0) {
           current = id;
         }
       }
-      setActive(current ?? ids[0] ?? null);
+      setActive(current);
     };
     handler();
     window.addEventListener("scroll", handler, { passive: true });
