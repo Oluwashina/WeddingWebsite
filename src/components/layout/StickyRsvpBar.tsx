@@ -53,14 +53,25 @@ export function StickyRsvpBar({ meta }: { meta: WeddingMeta }) {
             <div className="flex items-center gap-3">
               <div className="min-w-0 flex-1">
                 {rsvp ? (
-                  <>
-                    <p className="truncate font-sans text-[0.6rem] uppercase tracking-[0.22em] text-gold">
-                      You&rsquo;re on the list
-                    </p>
-                    <p className="truncate font-display text-lg leading-tight text-ink">
-                      Ref {rsvp.reference}
-                    </p>
-                  </>
+                  rsvp.attending !== "no" ? (
+                    <>
+                      <p className="truncate font-sans text-[0.6rem] uppercase tracking-[0.22em] text-gold">
+                        You&rsquo;re on the list
+                      </p>
+                      <p className="truncate font-display text-lg leading-tight text-ink">
+                        Ref {rsvp.reference}
+                      </p>
+                    </>
+                  ) : (
+                    <>
+                      <p className="truncate font-sans text-[0.6rem] uppercase tracking-[0.22em] text-ink-muted">
+                        RSVP received
+                      </p>
+                      <p className="truncate font-display text-lg leading-tight text-ink">
+                        We&rsquo;ll miss you
+                      </p>
+                    </>
+                  )
                 ) : (
                   <>
                     <p className="truncate font-sans text-[0.6rem] uppercase tracking-[0.22em] text-ink-muted">

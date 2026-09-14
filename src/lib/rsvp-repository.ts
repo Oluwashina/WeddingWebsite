@@ -41,13 +41,22 @@ async function writeAll(records: RsvpRecord[]): Promise<void> {
   }
 }
 
+function uniqueReference(existing: RsvpRecord[]): string {
+  const taken = new Set(existing.map((record) => record.reference));
+  for (let attempt = 0; attempt < 12; attempt += 1) {
+    const reference = createReference();
+    if (!taken.has(reference)) return reference;
+  }
+  throw new Error("Could not generate a unique RSVP reference.");
+}
+
 const fileRsvpRepository: RsvpRepository = {
   async create(submission) {
     const records = await readAll();
     const record: RsvpRecord = {
       ...submission,
       id: `rsvp_${Date.now().toString(36)}`,
-      reference: createReference(),
+      reference: uniqueReference(records),
       createdAt: new Date().toISOString(),
     };
     records.push(record);

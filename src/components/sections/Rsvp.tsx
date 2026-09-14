@@ -11,6 +11,7 @@ import { ShareButton } from "@/components/layout/ShareButton";
 import { CheckIcon, CopyIcon, WhatsAppIcon } from "@/components/ui/icons";
 import { useCopyToClipboard } from "@/lib/hooks";
 import { saveLocalRsvp, submitRsvp, useLocalRsvp } from "@/lib/rsvp-client";
+import { RSVP_MEAL_OPTIONS } from "@/lib/rsvp-labels";
 import { MAX_GUESTS, validateRsvp, type FieldErrors } from "@/lib/rsvp-validation";
 import type {
   AttendanceAnswer,
@@ -22,13 +23,6 @@ import type {
   WeddingMeta,
 } from "@/lib/types";
 import { cn, whatsappLink } from "@/lib/utils";
-
-const MEALS: { value: MealPreference; label: string }[] = [
-  { value: "jollof", label: "Jollof & grilled chicken" },
-  { value: "continental", label: "Continental" },
-  { value: "vegetarian", label: "Vegetarian" },
-  { value: "no-preference", label: "No preference" },
-];
 
 const silk = [0.22, 1, 0.36, 1] as const;
 
@@ -76,11 +70,9 @@ export function Rsvp({ couple, meta, events, contact }: RsvpProps) {
   const [contactValue, setContactValue] = useState("");
   const [attending, setAttending] = useState<AttendanceAnswer | null>(null);
   const [guestCount, setGuestCount] = useState(1);
-  const [selectedEvents, setSelectedEvents] = useState<EventKind[]>([
-    "traditional",
-    "white",
-    "reception",
-  ]);
+  const [selectedEvents, setSelectedEvents] = useState<EventKind[]>(() =>
+    events.map((event) => event.kind),
+  );
   const [meal, setMeal] = useState<MealPreference>("no-preference");
   const [message, setMessage] = useState("");
   const [errors, setErrors] = useState<FieldErrors>({});
@@ -247,44 +239,70 @@ export function Rsvp({ couple, meta, events, contact }: RsvpProps) {
                         : "We'll miss you, truly. Thank you for letting us know. We'll make sure you get photos from the day."}
                     </p>
 
-                    <Ornament className="mt-7" />
+                    {done.attending === "yes" ? (
+                      <>
+                        <Ornament className="mt-7" />
 
-                    <div className="mt-7 w-full rounded-xl border border-dashed border-gold/40 bg-champagne/25 px-5 py-4">
-                      <p className="font-sans text-[0.55rem] uppercase tracking-[0.28em] text-ink-muted">
-                        Your confirmation number
-                      </p>
-                      <div className="mt-2 flex items-center justify-center gap-3">
-                        <span className="font-display text-[1.7rem] tracking-[0.12em] text-ink">
-                          {done.reference}
-                        </span>
-                        <button
-                          type="button"
-                          onClick={() => copy(done.reference)}
-                          aria-label="Copy confirmation number"
-                          className="flex h-9 w-9 items-center justify-center rounded-full text-ink-muted transition-colors hover:bg-ink/5 hover:text-gold"
+                        <div className="mt-7 w-full rounded-xl border border-dashed border-gold/40 bg-champagne/25 px-5 py-4">
+                          <p className="font-sans text-[0.55rem] uppercase tracking-[0.28em] text-ink-muted">
+                            Your confirmation number
+                          </p>
+                          <div className="mt-2 flex items-center justify-center gap-3">
+                            <span className="font-display text-[1.7rem] tracking-[0.12em] text-ink">
+                              {done.reference}
+                            </span>
+                            <button
+                              type="button"
+                              onClick={() => copy(done.reference)}
+                              aria-label="Copy confirmation number"
+                              className="flex h-9 w-9 items-center justify-center rounded-full text-ink-muted transition-colors hover:bg-ink/5 hover:text-gold"
+                            >
+                              {copied ? (
+                                <CheckIcon width={16} height={16} />
+                              ) : (
+                                <CopyIcon width={16} height={16} />
+                              )}
+                            </button>
+                          </div>
+                          <p className="mt-2 font-sans text-[0.7rem] text-ink-muted">
+                            Quote this at the door if we need to find your name.
+                          </p>
+                        </div>
+
+                        <div className="mt-7 flex w-full flex-col gap-3 sm:flex-row">
+                          <ButtonLink
+                            href={whatsappLink(
+                              contact.whatsapp,
+                              `Hi ${contact.name}, this is ${done.name}. My RSVP reference is ${done.reference}.`,
+                            )}
+                            variant="outline"
+                            fullWidth
+                          >
+                            <WhatsAppIcon width={16} height={16} />
+                            Message us
+                          </ButtonLink>
+                          <ShareButton meta={meta} variant="button" label="Share invite" fullWidth />
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <Ornament className="mt-7" />
+                        <div className="mt-7 flex w-full flex-col gap-3 sm:flex-row">
+                        <ButtonLink
+                          href={whatsappLink(
+                            contact.whatsapp,
+                            `Hi ${contact.name}, this is ${done.name}. I wanted to confirm I won't be able to make it. Thank you for understanding.`,
+                          )}
+                          variant="outline"
+                          fullWidth
                         >
-                          {copied ? <CheckIcon width={16} height={16} /> : <CopyIcon width={16} height={16} />}
-                        </button>
-                      </div>
-                      <p className="mt-2 font-sans text-[0.7rem] text-ink-muted">
-                        Quote this at the door if we need to find your name.
-                      </p>
-                    </div>
-
-                    <div className="mt-7 flex w-full flex-col gap-3 sm:flex-row">
-                      <ButtonLink
-                        href={whatsappLink(
-                          contact.whatsapp,
-                          `Hi ${contact.name}, this is ${done.name}. My RSVP reference is ${done.reference}.`,
-                        )}
-                        variant="outline"
-                        fullWidth
-                      >
-                        <WhatsAppIcon width={16} height={16} />
-                        Message us
-                      </ButtonLink>
-                      <ShareButton meta={meta} variant="button" label="Share invite" fullWidth />
-                    </div>
+                          <WhatsAppIcon width={16} height={16} />
+                          Message us
+                        </ButtonLink>
+                        <ShareButton meta={meta} variant="button" label="Share invite" fullWidth />
+                        </div>
+                      </>
+                    )}
 
                     {existing && !confirmed ? (
                       <button
@@ -466,7 +484,7 @@ export function Rsvp({ couple, meta, events, contact }: RsvpProps) {
                           <div>
                             <Label hint="Optional">Meal preference</Label>
                             <div className="flex flex-wrap gap-2">
-                              {MEALS.map((option) => {
+                              {RSVP_MEAL_OPTIONS.map((option) => {
                                 const selected = meal === option.value;
                                 return (
                                   <button

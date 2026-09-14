@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { sendRsvpNotification } from "@/lib/rsvp-email";
 import { rsvpRepository } from "@/lib/rsvp-repository";
 import { validateRsvp } from "@/lib/rsvp-validation";
 import type { RsvpResult } from "@/lib/types";
@@ -18,8 +19,10 @@ export async function POST(request: Request): Promise<NextResponse<RsvpResult>> 
 
   try {
     const record = await rsvpRepository.create(value);
+    await sendRsvpNotification(record);
     return NextResponse.json({ ok: true, reference: record.reference, record });
-  } catch {
+  } catch (error) {
+    console.error("RSVP submission failed:", error);
     return NextResponse.json(
       { ok: false, error: "We couldn't save your RSVP. Please try again or message us on WhatsApp." },
       { status: 500 },

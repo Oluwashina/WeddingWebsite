@@ -1,9 +1,9 @@
+import { RSVP_EVENT_KINDS, RSVP_MEAL_OPTIONS } from "@/lib/rsvp-labels";
 import type { EventKind, RsvpSubmission } from "@/lib/types";
 
 export const MAX_GUESTS = 6;
 
-const EVENT_KINDS: EventKind[] = ["traditional", "white", "reception"];
-const MEALS = ["jollof", "continental", "vegetarian", "no-preference"] as const;
+const MEALS = RSVP_MEAL_OPTIONS.map((option) => option.value);
 
 export type FieldErrors = Partial<Record<keyof RsvpSubmission, string>>;
 
@@ -45,7 +45,7 @@ export function validateRsvp(input: Partial<RsvpSubmission>): {
   }
 
   const events = (input.events ?? []).filter((kind): kind is EventKind =>
-    EVENT_KINDS.includes(kind),
+    RSVP_EVENT_KINDS.includes(kind),
   );
   if (attending === "yes" && events.length === 0) {
     errors.events = "Select at least one celebration you'll join.";
