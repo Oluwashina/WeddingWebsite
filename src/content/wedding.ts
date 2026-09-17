@@ -124,7 +124,7 @@ export const weddingContent: WeddingContent = {
       title: "Growing Together",
       location: "Through every season",
       body:
-        "From everyday moments to milestone memories, we learned to choose each other, in patience, in joy, and in faith.",
+        "Every relationship comes with its own unique experiences; the good, the bad and the ugly. Ours hasn't been without these experiences, but I guess what makes it worthwhile is who you're sharing these experiences with. It's been 3 years of sharing beautiful moments, experiencing major milestones and forging lasting memories together and we wouldn't have had it any other way.",
       photo: {
         src: "/images/story-growing-together.jpeg",
         alt: "Temitope and Victor growing together",
@@ -136,7 +136,7 @@ export const weddingContent: WeddingContent = {
       title: "Forever Starts Here",
       location: "Lagos",
       body:
-        "On December 3rd, surrounded by the people who prayed us here, we say yes to forever. We cannot wait to celebrate with you.",
+        "On December 3rd, surrounded by the people who love, support and have prayed for us, we say yes to doing life forever; hand in hand, one foot in front of the other, until grey hairs. We cannot wait to celebrate with you.",
       photo: {
         src: "/images/story-forever-starts.jpeg",
         alt: "Temitope and Victor, forever starts here",

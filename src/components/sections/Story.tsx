@@ -69,17 +69,19 @@ function Milestone({
         </motion.span>
       </div>
 
-      {/* Copy */}
-      <div className={cn("min-w-0", flip ? "lg:order-1 lg:pr-14 lg:text-right" : "lg:order-3 lg:pl-14")}>
+      {/* Copy — body stays left-aligned; right-align on flip only broke long prose on desktop */}
+      <div className={cn("min-w-0", flip ? "lg:order-1 lg:pr-14" : "lg:order-3 lg:pl-14")}>
         <Reveal y={22}>
-          <p className="font-display text-[2.4rem] leading-none text-gold/85 sm:text-[3rem]">
-            {milestone.year}
-          </p>
-          <h3 className="mt-3 text-[1.55rem] leading-tight sm:text-[1.9rem]">{milestone.title}</h3>
-          <p className="mt-2 font-sans text-[0.6rem] uppercase tracking-[0.26em] text-ink-muted">
-            {milestone.location}
-          </p>
-          <p className="mt-4 text-pretty text-[0.95rem] leading-[1.85] text-ink-soft sm:text-[1rem]">
+          <div className={cn(flip && "lg:text-right")}>
+            <p className="font-display text-[2.4rem] leading-none text-gold/85 sm:text-[3rem]">
+              {milestone.year}
+            </p>
+            <h3 className="mt-3 text-[1.55rem] leading-tight sm:text-[1.9rem]">{milestone.title}</h3>
+            <p className="mt-2 font-sans text-[0.6rem] uppercase tracking-[0.26em] text-ink-muted">
+              {milestone.location}
+            </p>
+          </div>
+          <p className="mt-4 text-left text-pretty text-[0.95rem] leading-[1.85] text-ink-soft sm:text-[1rem]">
             {milestone.body}
           </p>
 
