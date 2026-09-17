@@ -186,7 +186,7 @@ export const weddingContent: WeddingContent = {
         includes: ["Blush pink fabric cut to your chosen yardage", "Matching gele where selected"],
         photo: {
           src: "/images/asoebi-ladies.jpg",
-          alt: "Ladies in blush pink Aso Ebi with caramel gold gele",
+          alt: "Ladies in blush pink Aso Ebi with floral brocade gele",
         },
         tiers: [
           { id: "ladies-3-gele", label: "3 yards & Gele", price: 55000 },
@@ -204,7 +204,7 @@ export const weddingContent: WeddingContent = {
         includes: ["Blush pink fabric cut to your chosen yardage", "Matching cap where selected"],
         photo: {
           src: "/images/asoebi-gents.jpg",
-          alt: "Gentlemen in blush pink Aso Ebi agbada with matching cap",
+          alt: "Gentlemen in blush pink Aso Ebi agbada with floral brocade cap",
         },
         tiers: [
           { id: "gents-4-cap", label: "4 yards with Cap", price: 40000 },

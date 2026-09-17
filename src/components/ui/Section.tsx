@@ -45,7 +45,9 @@ export function Section({
               headerClassName,
             )}
           >
-            {eyebrow ? <p className="eyebrow">{eyebrow}</p> : null}
+            {eyebrow ? (
+              <p className={cn("eyebrow", tone === "deep" && "text-ivory")}>{eyebrow}</p>
+            ) : null}
             {title ? (
               <h2
                 className={cn(
