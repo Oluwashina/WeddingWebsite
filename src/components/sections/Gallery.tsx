@@ -38,9 +38,7 @@ export function Gallery({ photos, couple }: { photos: Photo[]; couple: Couple })
   return (
     <Section
       id="gallery"
-      eyebrow="The Gallery"
-      title="Moments Before The Moment"
-      intro="Engagement shoots, quiet afternoons and a few frames our photographer swears we didn't notice."
+      title="Our Gallery"
     >
       <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3">
         {photos.map((photo, i) => (

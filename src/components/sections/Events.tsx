@@ -195,7 +195,7 @@ export function Events({ events, couple }: { events: WeddingEvent[]; couple: Cou
       id="wedding"
       eyebrow="The Celebration"
       title="Wedding Details"
-      intro="One beautiful day in Lagos, with a traditional ceremony in the morning and dinner and dancing into the night. Save both to your calendar or tap for directions."
+      intro="One beautiful day in Lagos, with a traditional ceremony in the morning and a beautiful reception following immediately after. Save both to your calendar or tap for directions."
     >
       <Reveal className="mx-auto mb-10 flex max-w-3xl justify-center sm:mb-12">
         <div className="inline-flex flex-wrap items-center justify-center gap-x-4 gap-y-2 rounded-full border border-ink/10 bg-champagne/30 px-6 py-3 text-center">

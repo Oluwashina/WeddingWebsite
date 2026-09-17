@@ -124,6 +124,8 @@ export interface AsoEbi {
   options: AsoEbiOption[];
   showBankDetails?: boolean;
   bankAccounts?: BankAccount[];
+  /** Shown as a P.S. near pricing / payment (e.g. dispatch not included). */
+  footnote?: string;
 }
 
 export type RegistryCategory = "home" | "travel" | "experiences" | "cash" | "other";
@@ -215,15 +217,11 @@ export interface WeddingContent {
 /* ------------------------------------------------------------------ */
 
 export type AttendanceAnswer = "yes" | "no";
-export type MealPreference = "jollof" | "continental" | "vegetarian" | "no-preference";
 
 export interface RsvpSubmission {
   fullName: string;
   contact: string;
   attending: AttendanceAnswer;
-  guestCount: number;
-  events: EventKind[];
-  mealPreference?: MealPreference;
   message?: string;
 }
 

@@ -1,9 +1,4 @@
-import { RSVP_EVENT_KINDS, RSVP_MEAL_OPTIONS } from "@/lib/rsvp-labels";
-import type { EventKind, RsvpSubmission } from "@/lib/types";
-
-export const MAX_GUESTS = 6;
-
-const MEALS = RSVP_MEAL_OPTIONS.map((option) => option.value);
+import type { RsvpSubmission } from "@/lib/types";
 
 export type FieldErrors = Partial<Record<keyof RsvpSubmission, string>>;
 
@@ -37,20 +32,6 @@ export function validateRsvp(input: Partial<RsvpSubmission>): {
     errors.attending = "Let us know if you can make it.";
   }
 
-  const guestCount = Number(input.guestCount ?? 1);
-  if (attending === "yes") {
-    if (!Number.isInteger(guestCount) || guestCount < 1 || guestCount > MAX_GUESTS) {
-      errors.guestCount = `Choose between 1 and ${MAX_GUESTS} guests.`;
-    }
-  }
-
-  const events = (input.events ?? []).filter((kind): kind is EventKind =>
-    RSVP_EVENT_KINDS.includes(kind),
-  );
-  if (attending === "yes" && events.length === 0) {
-    errors.events = "Select at least one celebration you'll join.";
-  }
-
   const message = (input.message ?? "").trim();
   if (message.length > 600) {
     errors.message = "Please keep your note under 600 characters.";
@@ -60,19 +41,12 @@ export function validateRsvp(input: Partial<RsvpSubmission>): {
     return { errors };
   }
 
-  const meal = MEALS.includes(input.mealPreference as (typeof MEALS)[number])
-    ? input.mealPreference
-    : undefined;
-
   return {
     errors,
     value: {
       fullName,
       contact,
       attending: attending as "yes" | "no",
-      guestCount: attending === "yes" ? guestCount : 0,
-      events: attending === "yes" ? events : [],
-      mealPreference: attending === "yes" ? meal : undefined,
       message: message || undefined,
     },
   };

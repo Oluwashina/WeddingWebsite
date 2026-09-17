@@ -24,13 +24,13 @@ export default async function HomePage() {
   return (
     <MusicProvider track={meta.musicTrack}>
       <InvitationGate couple={couple} meta={meta}>
-        <Navbar couple={couple} meta={meta} />
+        <Navbar couple={couple} />
 
         <main>
           <Hero couple={couple} meta={meta} />
           <Story story={story} couple={couple} />
           <Events events={events} couple={couple} />
-          <Rsvp couple={couple} meta={meta} events={events} contact={contacts[0]} />
+          <Rsvp couple={couple} meta={meta} contact={contacts[0]} />
           <AsoEbi asoEbi={asoEbi} couple={couple} />
           <DressCode dressCode={dressCode} couple={couple} />
           <Gallery photos={gallery} couple={couple} />

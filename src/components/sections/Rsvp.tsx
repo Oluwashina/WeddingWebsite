@@ -11,17 +11,8 @@ import { ShareButton } from "@/components/layout/ShareButton";
 import { CheckIcon, CopyIcon, WhatsAppIcon } from "@/components/ui/icons";
 import { useCopyToClipboard } from "@/lib/hooks";
 import { saveLocalRsvp, submitRsvp, useLocalRsvp } from "@/lib/rsvp-client";
-import { RSVP_MEAL_OPTIONS } from "@/lib/rsvp-labels";
-import { MAX_GUESTS, validateRsvp, type FieldErrors } from "@/lib/rsvp-validation";
-import type {
-  AttendanceAnswer,
-  Contact,
-  Couple,
-  EventKind,
-  MealPreference,
-  WeddingEvent,
-  WeddingMeta,
-} from "@/lib/types";
+import { validateRsvp, type FieldErrors } from "@/lib/rsvp-validation";
+import type { AttendanceAnswer, Contact, Couple, WeddingMeta } from "@/lib/types";
 import { cn, whatsappLink } from "@/lib/utils";
 
 const silk = [0.22, 1, 0.36, 1] as const;
@@ -60,20 +51,14 @@ function FieldError({ message }: { message?: string }) {
 interface RsvpProps {
   couple: Couple;
   meta: WeddingMeta;
-  events: WeddingEvent[];
   contact: Contact;
 }
 
-export function Rsvp({ couple, meta, events, contact }: RsvpProps) {
+export function Rsvp({ couple, meta, contact }: RsvpProps) {
   const existing = useLocalRsvp();
   const [fullName, setFullName] = useState("");
   const [contactValue, setContactValue] = useState("");
   const [attending, setAttending] = useState<AttendanceAnswer | null>(null);
-  const [guestCount, setGuestCount] = useState(1);
-  const [selectedEvents, setSelectedEvents] = useState<EventKind[]>(() =>
-    events.map((event) => event.kind),
-  );
-  const [meal, setMeal] = useState<MealPreference>("no-preference");
   const [message, setMessage] = useState("");
   const [errors, setErrors] = useState<FieldErrors>({});
   const [formError, setFormError] = useState<string | null>(null);
@@ -100,12 +85,6 @@ export function Rsvp({ couple, meta, events, contact }: RsvpProps) {
     return () => window.clearTimeout(id);
   }, [confirmed]);
 
-  const toggleEvent = (kind: EventKind) => {
-    setSelectedEvents((current) =>
-      current.includes(kind) ? current.filter((k) => k !== kind) : [...current, kind],
-    );
-  };
-
   const handleSubmit = async (formEvent: FormEvent) => {
     formEvent.preventDefault();
     setFormError(null);
@@ -114,9 +93,6 @@ export function Rsvp({ couple, meta, events, contact }: RsvpProps) {
       fullName,
       contact: contactValue,
       attending: attending ?? undefined,
-      guestCount,
-      events: selectedEvents,
-      mealPreference: meal,
       message,
     };
 
@@ -410,104 +386,6 @@ export function Rsvp({ couple, meta, events, contact }: RsvpProps) {
                       </div>
                       <FieldError message={errors.attending} />
                     </fieldset>
-
-                    <AnimatePresence initial={false}>
-                      {attending === "yes" ? (
-                        <motion.div
-                          key="attending-details"
-                          initial={{ opacity: 0, height: 0 }}
-                          animate={{ opacity: 1, height: "auto" }}
-                          exit={{ opacity: 0, height: 0 }}
-                          transition={{ duration: 0.45, ease: silk }}
-                          className="flex flex-col gap-6 overflow-hidden"
-                        >
-                          <div id="rsvp-guestCount">
-                            <Label hint={`Max ${MAX_GUESTS}`}>Number of guests</Label>
-                            <div className="flex items-center gap-4">
-                              <div className="flex items-center gap-1 rounded-full border border-ink/12 bg-white/60 p-1">
-                                <button
-                                  type="button"
-                                  onClick={() => setGuestCount((n) => Math.max(1, n - 1))}
-                                  aria-label="Fewer guests"
-                                  className="flex h-11 w-11 items-center justify-center rounded-full text-lg text-ink-soft transition-colors hover:bg-champagne/50 disabled:opacity-40"
-                                  disabled={guestCount <= 1}
-                                >
-                                  −
-                                </button>
-                                <span className="w-10 text-center font-display text-2xl tabular-nums">
-                                  {guestCount}
-                                </span>
-                                <button
-                                  type="button"
-                                  onClick={() => setGuestCount((n) => Math.min(MAX_GUESTS, n + 1))}
-                                  aria-label="More guests"
-                                  className="flex h-11 w-11 items-center justify-center rounded-full text-lg text-ink-soft transition-colors hover:bg-champagne/50 disabled:opacity-40"
-                                  disabled={guestCount >= MAX_GUESTS}
-                                >
-                                  +
-                                </button>
-                              </div>
-                              <span className="font-sans text-[0.78rem] text-ink-muted">
-                                including yourself
-                              </span>
-                            </div>
-                            <FieldError message={errors.guestCount} />
-                          </div>
-
-                          <div id="rsvp-events">
-                            <Label hint="Select all that apply">Which celebrations?</Label>
-                            <div className="flex flex-wrap gap-2">
-                              {events.map((event) => {
-                                const selected = selectedEvents.includes(event.kind);
-                                return (
-                                  <button
-                                    key={event.id}
-                                    type="button"
-                                    onClick={() => toggleEvent(event.kind)}
-                                    aria-pressed={selected}
-                                    className={cn(
-                                      "inline-flex min-h-[44px] items-center gap-2 rounded-full border px-4 font-sans text-[0.76rem] transition-all duration-300",
-                                      selected
-                                        ? "border-gold bg-gold/12 text-ink"
-                                        : "border-ink/12 bg-white/60 text-ink-muted hover:border-gold/50",
-                                    )}
-                                  >
-                                    {selected ? <CheckIcon width={14} height={14} className="text-gold" /> : null}
-                                    {event.name}
-                                  </button>
-                                );
-                              })}
-                            </div>
-                            <FieldError message={errors.events} />
-                          </div>
-
-                          <div>
-                            <Label hint="Optional">Meal preference</Label>
-                            <div className="flex flex-wrap gap-2">
-                              {RSVP_MEAL_OPTIONS.map((option) => {
-                                const selected = meal === option.value;
-                                return (
-                                  <button
-                                    key={option.value}
-                                    type="button"
-                                    onClick={() => setMeal(option.value)}
-                                    aria-pressed={selected}
-                                    className={cn(
-                                      "inline-flex min-h-[44px] items-center rounded-full border px-4 font-sans text-[0.76rem] transition-all duration-300",
-                                      selected
-                                        ? "border-forest bg-forest text-ivory"
-                                        : "border-ink/12 bg-white/60 text-ink-muted hover:border-gold/50",
-                                    )}
-                                  >
-                                    {option.label}
-                                  </button>
-                                );
-                              })}
-                            </div>
-                          </div>
-                        </motion.div>
-                      ) : null}
-                    </AnimatePresence>
 
                     <label className="block" htmlFor="rsvp-message">
                       <Label hint="Optional">A note for the couple</Label>

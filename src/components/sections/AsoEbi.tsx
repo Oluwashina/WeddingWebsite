@@ -26,17 +26,6 @@ function resolveTier(option: AsoEbiOption, tierId: string | null): AsoEbiTier | 
   return null;
 }
 
-function tierRangeLabel(option: AsoEbiOption): string {
-  if (!option.tiers?.length) {
-    return option.price != null ? formatMoney(option.price, option.currency) : "";
-  }
-  const prices = option.tiers.map((tier) => tier.price);
-  const min = Math.min(...prices);
-  const max = Math.max(...prices);
-  if (min === max) return formatMoney(min, option.currency);
-  return `${formatMoney(min, option.currency)} to ${formatMoney(max, option.currency)}`;
-}
-
 export function AsoEbi({ asoEbi, couple }: AsoEbiProps) {
   const [activeOption, setActiveOption] = useState<AsoEbiOption | null>(null);
   const [selectedTierId, setSelectedTierId] = useState<string | null>(null);
@@ -112,15 +101,10 @@ My name is: `
               </div>
 
               <div className="flex flex-1 flex-col p-6 sm:p-8">
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <h3 className="text-[1.65rem] leading-tight">{option.name}</h3>
-                    <p className="mt-1.5 font-sans text-[0.6rem] uppercase tracking-[0.22em] text-gold">
-                      {option.colorway}
-                    </p>
-                  </div>
-                  <p className="shrink-0 text-right font-display text-[1.15rem] leading-tight text-ink sm:text-[1.35rem]">
-                    {tierRangeLabel(option)}
+                <div>
+                  <h3 className="text-[1.65rem] leading-tight">{option.name}</h3>
+                  <p className="mt-1.5 font-sans text-[0.6rem] uppercase tracking-[0.22em] text-gold">
+                    {option.colorway}
                   </p>
                 </div>
 
@@ -168,12 +152,21 @@ My name is: `
         ))}
       </RevealGroup>
 
+      {asoEbi.footnote ? (
+        <Reveal className="mx-auto mt-8 max-w-3xl text-center text-[0.88rem] leading-relaxed text-ink-soft sm:mt-10">
+          <span className="font-sans text-[0.62rem] uppercase tracking-[0.22em] text-ink-muted">
+            P.S.{" "}
+          </span>
+          {asoEbi.footnote}
+        </Reveal>
+      ) : null}
+
       {asoEbi.showBankDetails && asoEbi.bankAccounts?.length ? (
         <Reveal className="mx-auto mt-12 max-w-3xl rounded-[1.25rem] border border-gold/25 bg-ivory p-6 sm:p-8">
           <h3 className="text-[1.4rem]">Payment details</h3>
           <p className="mt-2 text-[0.9rem] leading-relaxed text-ink-soft">
-            Send payment to the account below, then WhatsApp your proof of payment, chosen option,
-            and measurements to {asoEbi.coordinator.name} at {asoEbi.coordinator.phone}.
+            Send payment to the account below, then WhatsApp your proof of payment and chosen option
+            to {asoEbi.coordinator.name} at {asoEbi.coordinator.phone}.
           </p>
           <div className="mt-6 flex flex-col gap-4">
             {asoEbi.bankAccounts.map((account) => (

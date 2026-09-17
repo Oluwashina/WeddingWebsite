@@ -10,7 +10,7 @@ export const weddingContent: WeddingContent = {
   couple: {
     id: "couple-temitope-victor",
     brideFirstName: "Temitope",
-    brideFullName: "Temitope Oladimeji",
+    brideFullName: "Temitope",
     groomFirstName: "Victor",
     groomFullName: "Victor",
     shortNames: "Temitope & Victor",
@@ -20,7 +20,7 @@ export const weddingContent: WeddingContent = {
     invitationEyebrow: "Tune in to",
     invitationHeadline: "#LOVETV",
     introduction:
-      "Two hearts, one love story, and a celebration we cannot wait to share with you. Join us as we begin forever, dressed in joy, surrounded by family, and dancing far too late into the night.",
+      "Two hearts, one love story, and a celebration we cannot wait to share with you. Join us as we begin forever, dressed in joy, surrounded by family, with lots of laughing and dancing.",
     logo: {
       src: "/images/tv-logo.png",
       alt: "#LOVETV",
@@ -86,9 +86,9 @@ export const weddingContent: WeddingContent = {
       id: "event-reception",
       kind: "reception",
       name: "Reception",
-      subtitle: "Dinner & Dancing",
+      subtitle: "Food & Dancing",
       description:
-        "The celebration continues with dinner, speeches, our first dance, and dancing until our feet give out.",
+        "The celebration continues with food, our first dance, and lots of merriment until the band stops singing.",
       startsAt: "2026-12-03T14:00:00+01:00",
       endsAt: "2026-12-03T22:00:00+01:00",
       displayDate: "Thursday, 3 December 2026",
@@ -112,7 +112,7 @@ export const weddingContent: WeddingContent = {
       title: "How It Started",
       location: "Lagos",
       body:
-        "Every great love story has a first chapter. Ours began with laughter, long conversations, and the quiet certainty that this was something special.",
+        "It started with conversations. Nothing too dramatic. We kept finding ourselves in situations that required us to spend time talking with each other and the fondness grew from there. After a couple weeks of constant communication, feelings of affection were expressed. Although we didn't start dating immediately, it felt like it was only a matter of time; and when the time was right, I, Victor took matters into my hands as Temitope wanted to take all the time in the whole world. Lol. Well, she said yes to being my girlfriend and here we are!",
       photo: {
         src: "/images/story-how-it-started.jpeg",
         alt: "Temitope and Victor, how it started",
@@ -148,9 +148,10 @@ export const weddingContent: WeddingContent = {
     id: "aso-ebi-2026",
     headline: "Be Part of the Celebration",
     intro:
-      "Our Aso Ebi is blush pink, the same beautiful cloth for ladies and gentlemen. Wearing it is entirely optional, and you are loved either way.",
-    deadline: "2026-10-15T23:59:00+01:00",
-    deadlineDisplay: "Thursday, 15 October 2026",
+      "Our Aso Ebi is blush pink, the same beautiful cloth for ladies and gentlemen.",
+    deadline: "2026-10-30T23:59:00+01:00",
+    deadlineDisplay: "Friday, 30 October 2026",
+    footnote: "Please note that this amount doesn't include dispatch.",
     showBankDetails: true,
     bankAccounts: [
       {
@@ -185,7 +186,7 @@ export const weddingContent: WeddingContent = {
         includes: ["Blush pink fabric cut to your chosen yardage", "Matching gele where selected"],
         photo: {
           src: "/images/asoebi-ladies.jpg",
-          alt: "Blush pink ladies Aso Ebi fabric and gele",
+          alt: "Ladies in blush pink Aso Ebi with caramel gold gele",
         },
         tiers: [
           { id: "ladies-3-gele", label: "3 yards & Gele", price: 55000 },
@@ -203,7 +204,7 @@ export const weddingContent: WeddingContent = {
         includes: ["Blush pink fabric cut to your chosen yardage", "Matching cap where selected"],
         photo: {
           src: "/images/asoebi-gents.jpg",
-          alt: "Blush pink gentlemen Aso Ebi fabric and cap",
+          alt: "Gentlemen in blush pink Aso Ebi agbada with matching cap",
         },
         tiers: [
           { id: "gents-4-cap", label: "4 yards with Cap", price: 40000 },
@@ -216,9 +217,9 @@ export const weddingContent: WeddingContent = {
 
   registry: {
     id: "registry-2026",
-    headline: "Your Presence Is Our Greatest Gift",
+    headline: "We Truly Appreciate Your Generosity",
     intro:
-      "Showing up is more than enough, truly. But we have been asked so many times that we finally made a list. Everything here is optional.",
+      "Thank you for choosing to bless us as we begin our journey to forever. We wholeheartedly accept your gifts of love. You can monetise your gifts using the details below.",
     showBankDetails: true,
     bankAccounts: [
       {
@@ -231,73 +232,10 @@ export const weddingContent: WeddingContent = {
     ],
     items: [
       {
-        id: "gift-mixer",
-        name: "Kitchen Stand Mixer",
-        category: "home",
-        description:
-          "For the Sunday baking sessions and jollof experiments we have planned for our new home.",
-        amount: 185000,
-        currency: "NGN",
-        photo: { src: "/images/registry-home.jpg", alt: "A stand mixer on a kitchen counter" },
-        isContribution: true,
-      },
-      {
-        id: "gift-linens",
-        name: "Linen Bedding Set",
-        category: "home",
-        description: "Soft, stone-washed linen in blush and ivory, for slow mornings together.",
-        amount: 120000,
-        currency: "NGN",
-        photo: { src: "/images/registry-linen.jpg", alt: "Folded linen bedding" },
-        isContribution: true,
-      },
-      {
-        id: "gift-flights",
-        name: "Honeymoon Flights",
-        category: "travel",
-        description: "Help us get to our honeymoon destination. Every mile is a memory waiting to happen.",
-        amount: 250000,
-        currency: "NGN",
-        photo: { src: "/images/registry-travel.jpg", alt: "Turquoise water and a wooden boat" },
-        isContribution: true,
-      },
-      {
-        id: "gift-villa",
-        name: "A Night by the Water",
-        category: "travel",
-        description: "Gift us one night of our honeymoon stay, sunrise swim included.",
-        amount: 180000,
-        currency: "NGN",
-        photo: { src: "/images/registry-villa.jpg", alt: "A quiet beach house terrace at sunrise" },
-        isContribution: true,
-      },
-      {
-        id: "gift-spa",
-        name: "Couples Spa Day",
-        category: "experiences",
-        description: "A relaxed afternoon of massages and quiet, our treat to ourselves after the wedding whirlwind.",
-        amount: 95000,
-        currency: "NGN",
-        photo: { src: "/images/registry-experience.jpg", alt: "Spa essentials and warm towels" },
-        isContribution: true,
-      },
-      {
-        id: "gift-portrait",
-        name: "Our First Home Portrait",
-        category: "other",
-        description:
-          "A commissioned painting of the two of us, for the wall of whatever home we build together.",
-        amount: 220000,
-        currency: "NGN",
-        photo: { src: "/images/registry-portrait.jpg", alt: "A framed portrait on a warm wall" },
-        isContribution: true,
-      },
-      {
         id: "gift-cash",
         name: "Thank You For Your Gift of Love",
         category: "cash",
-        description:
-          "We greatly appreciate your kind heartedness in choosing to gift us for our wedding. You can transfer to us using the account below. We fully receive it with both hands.",
+        description: "Tap below for Providus Bank details to send your gift.",
         currency: "NGN",
         photo: { src: "/images/registry-cash.jpg", alt: "A gold envelope resting on ivory paper" },
         isContribution: true,
@@ -310,7 +248,7 @@ export const weddingContent: WeddingContent = {
       id: "faq-wear",
       question: "What should I wear?",
       answer:
-        "Blush pink or caramel. Aso Ebi is welcome if you ordered it, but never required.",
+        "The wedding colours are Blush pink and caramel. You can show up in our Aso Ebi, if you ordered it. However, it is not compulsory.",
       link: { label: "See the dress code", href: "#dress-code" },
     },
     {
@@ -324,13 +262,12 @@ export const weddingContent: WeddingContent = {
       id: "faq-plus-one",
       question: "Can I bring a plus one?",
       answer:
-        "Our invitation covers the names printed on it. If you were given a plus one, you can add them when you RSVP.",
+        "Our invitation covers the names printed on it. If you were given a plus one, mention them in your RSVP note or message Esther on WhatsApp.",
     },
     {
       id: "faq-rsvp-when",
       question: "When should I RSVP?",
-      answer:
-        "By Friday, 30 October 2026 please. Catering numbers are confirmed the following week.",
+      answer: "By Friday, 30 October 2026 please.",
       link: { label: "RSVP now", href: "#rsvp" },
     },
     {
@@ -344,14 +281,14 @@ export const weddingContent: WeddingContent = {
       id: "faq-gift",
       question: "Can I send a gift?",
       answer:
-        "Your presence really is the gift. Browse our registry for ideas, or transfer a cash gift directly to the account shown on the registry page.",
-      link: { label: "Visit the registry", href: "#registry" },
+        "Yes, you can. Please transfer a cash gift directly to the account details shown on the gift registry page.",
+      link: { label: "View gift details", href: "#registry" },
     },
     {
       id: "faq-arrival",
       question: "What time should I arrive?",
       answer:
-        "Traditional wedding: please arrive by 10:30 AM for an 11:00 AM start. Reception: from 2:00 PM.",
+        "Traditional wedding: please arrive by 10:30 AM for an 11:00 AM start. Reception starts at 2pm.",
     },
     {
       id: "faq-photos",

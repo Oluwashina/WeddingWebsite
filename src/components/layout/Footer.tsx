@@ -1,6 +1,6 @@
 "use client";
 
-import { ShareButton } from "@/components/layout/ShareButton";
+import Image from "next/image";
 import { Monogram, Ornament } from "@/components/ui/Ornament";
 import { Reveal } from "@/components/ui/Reveal";
 import { Petals } from "@/components/ui/Petals";
@@ -21,7 +21,17 @@ export function Footer({
 
       <div className="container-page relative flex flex-col items-center text-center">
         <Reveal className="flex flex-col items-center">
-          <Monogram text={couple.monogram} size={84} className="text-gold-light/70" />
+          {couple.seal ? (
+            <Image
+              src={couple.seal.src}
+              alt={couple.seal.alt}
+              width={84}
+              height={84}
+              className="h-[5.25rem] w-[5.25rem] object-contain opacity-90"
+            />
+          ) : (
+            <Monogram text={couple.monogram} size={84} className="text-gold-light/70" />
+          )}
 
           <h2 className="mt-8 font-display text-[2.5rem] leading-[1.05] sm:text-[3.2rem]">
             {couple.shortNames}
@@ -43,17 +53,8 @@ export function Footer({
           </p>
         </Reveal>
 
-        <Reveal delay={0.1} className="mt-10">
-          <ShareButton
-            meta={meta}
-            variant="button"
-            label="Share the invitation"
-            className="border-ivory/25 text-ivory hover:border-gold-light hover:text-gold-light"
-          />
-        </Reveal>
-
         {socials.length ? (
-          <Reveal delay={0.15} className="mt-10 flex flex-wrap items-center justify-center gap-x-7 gap-y-3">
+          <Reveal delay={0.1} className="mt-10 flex flex-wrap items-center justify-center gap-x-7 gap-y-3">
             {socials.map((social) => (
               <a
                 key={social.id}

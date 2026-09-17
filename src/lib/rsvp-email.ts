@@ -1,13 +1,8 @@
 import nodemailer from "nodemailer";
-import { formatRsvpEvents, RSVP_MEAL_LABELS } from "@/lib/rsvp-labels";
 import type { RsvpRecord } from "@/lib/types";
 
 function formatRecord(record: RsvpRecord): { text: string; html: string } {
   const attending = record.attending === "yes" ? "Yes, celebrating with you" : "Unable to attend";
-  const events =
-    record.attending === "yes" && record.events.length ? formatRsvpEvents(record.events) : "—";
-  const meal = record.mealPreference ? RSVP_MEAL_LABELS[record.mealPreference] : "—";
-  const guests = record.attending === "yes" ? String(record.guestCount) : "0";
   const message = record.message?.trim() || "—";
   const submitted = new Date(record.createdAt).toLocaleString("en-NG", {
     dateStyle: "full",
@@ -20,9 +15,6 @@ function formatRecord(record: RsvpRecord): { text: string; html: string } {
     `Name: ${record.fullName}`,
     `Contact: ${record.contact}`,
     `Attending: ${attending}`,
-    `Guests: ${guests}`,
-    `Events: ${events}`,
-    `Meal preference: ${meal}`,
     `Message: ${message}`,
     `Submitted: ${submitted}`,
   ];
@@ -36,9 +28,6 @@ function formatRecord(record: RsvpRecord): { text: string; html: string } {
           ["Reference", record.reference],
           ["Contact", record.contact],
           ["Attending", attending],
-          ["Guests", guests],
-          ["Events", events],
-          ["Meal", meal],
           ["Message", message],
           ["Submitted", submitted],
         ]

@@ -4,10 +4,9 @@ import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
 import { useInvitation } from "@/components/experience/InvitationContext";
-import { ShareButton } from "@/components/layout/ShareButton";
 import { CloseIcon, MenuIcon } from "@/components/ui/icons";
 import { useLockBodyScroll, useScrollSpy, useScrolled } from "@/lib/hooks";
-import type { Couple, WeddingMeta } from "@/lib/types";
+import type { Couple } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
 const NAV_ITEMS = [
@@ -50,7 +49,7 @@ function navHighlightId(active: string | null): string | null {
   return active;
 }
 
-export function Navbar({ couple, meta }: { couple: Couple; meta: WeddingMeta }) {
+export function Navbar({ couple }: { couple: Couple }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const scrolled = useScrolled(40);
   const activeSection = useScrollSpy(SPY_IDS);
@@ -133,7 +132,6 @@ export function Navbar({ couple, meta }: { couple: Couple; meta: WeddingMeta }) 
           </div>
 
           <div className="flex items-center gap-1 text-ink-soft">
-            <ShareButton meta={meta} />
             <button
               type="button"
               onClick={() => go("rsvp")}
@@ -207,19 +205,15 @@ export function Navbar({ couple, meta }: { couple: Couple; meta: WeddingMeta }) 
                 ))}
 
                 <motion.div
-                  className="mt-8 flex w-full items-center justify-center gap-4"
+                  className="mt-8 flex w-full justify-center"
                   initial={{ opacity: 0, y: 18 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.45, ease: [0.22, 1, 0.36, 1] }}
                 >
-                  <ShareButton
-                    meta={meta}
-                    className="text-ivory/80 hover:text-gold-light"
-                  />
                   <button
                     type="button"
                     onClick={() => go("rsvp")}
-                    className="inline-flex min-h-[54px] flex-1 items-center justify-center rounded-full bg-gold px-8 font-sans text-[0.7rem] uppercase tracking-[0.26em] text-ink"
+                    className="inline-flex min-h-[54px] w-full max-w-sm items-center justify-center rounded-full bg-gold px-8 font-sans text-[0.7rem] uppercase tracking-[0.26em] text-ink"
                   >
                     RSVP Now
                   </button>

@@ -57,9 +57,10 @@ export function Registry({ registry, couple }: RegistryProps) {
     <Section
       id="registry"
       eyebrow="Gift Registry"
-      title="Your Presence Is Our Greatest Gift"
+      title={registry.headline}
       intro={registry.intro}
     >
+      {registry.items.length > 1 ? (
       <Reveal className="mb-9 flex flex-wrap justify-center gap-2 sm:mb-12">
         {categories.map((category) => (
           <button
@@ -78,13 +79,19 @@ export function Registry({ registry, couple }: RegistryProps) {
           </button>
         ))}
       </Reveal>
+      ) : null}
 
       <motion.div
         key={filter}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-        className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+        className={cn(
+          "grid gap-6",
+          registry.items.length === 1
+            ? "mx-auto max-w-md"
+            : "sm:grid-cols-2 lg:grid-cols-3",
+        )}
       >
         {items.map((item) => (
           <article
