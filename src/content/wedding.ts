@@ -173,14 +173,14 @@ export const weddingContent: WeddingContent = {
       {
         id: "aso-ebi-ladies",
         name: "For the Ladies",
-        fabric: "Blush pink Aso Ebi outfit, premium fabric with matching gele",
+        fabric: "Blush Pink Lace and Caramel Gele",
         currency: "NGN",
         colorway: "Blush pink",
         swatches: ["#e8a4ad", "#f5dde1", "#d4929c"],
         includes: ["Blush pink fabric cut to your chosen yardage", "Matching gele where selected"],
         photo: {
           src: "/images/asoebi-ladies.jpg",
-          alt: "Ladies in blush pink Aso Ebi with floral brocade gele",
+          alt: "Ladies in blush pink beaded floral lace Aso Ebi with brocade gele",
         },
         tiers: [
           { id: "ladies-3-gele", label: "3 yards & Gele", price: 55000 },
@@ -191,7 +191,7 @@ export const weddingContent: WeddingContent = {
       {
         id: "aso-ebi-gents",
         name: "For the Gentlemen",
-        fabric: "Blush pink Aso Ebi outfit, premium fabric with matching cap",
+        fabric: "Blush Pink Material and Caramel Cap",
         currency: "NGN",
         colorway: "Blush pink",
         swatches: ["#e8a4ad", "#f5dde1", "#d4929c"],
