@@ -142,8 +142,7 @@ export function Rsvp({ couple, meta, contact }: RsvpProps) {
             <span className="mt-6 block h-px w-16 bg-gold-light/50" aria-hidden />
             <p className="mt-6 max-w-md text-[0.98rem] leading-[1.9] text-ivory/75">
               Every seat at our table has a name on it. Let us know if yours will be filled by{" "}
-              <span className="text-gold-light">{meta.rsvpDeadlineDisplay}</span> so we can plan the
-              food, the drinks and the dancing properly.
+              <span className="text-gold-light">{meta.rsvpDeadlineDisplay}</span>.
             </p>
 
             <div className="group mt-9 hidden overflow-hidden rounded-[1.25rem] lg:block">

@@ -13,13 +13,22 @@ function eventDetails(event: WeddingEvent): string {
   return `${event.description}\n\nDress code: ${event.dressCode}`;
 }
 
+const PUBLIC_EVENT_LOCATION = "Lagos, Nigeria";
+
+function eventLocation(event: WeddingEvent): string {
+  const venue = event.venue?.trim();
+  const address = event.address?.trim();
+  if (venue && address) return `${venue}, ${address}`;
+  return PUBLIC_EVENT_LOCATION;
+}
+
 export function googleCalendarUrl(event: WeddingEvent, coupleNames: string): string {
   const params = new URLSearchParams({
     action: "TEMPLATE",
     text: `${coupleNames}: ${event.name}`,
     dates: `${toUtcStamp(event.startsAt)}/${toUtcStamp(event.endsAt)}`,
     details: eventDetails(event),
-    location: `${event.venue}, ${event.address}`,
+    location: eventLocation(event),
   });
   return `https://calendar.google.com/calendar/render?${params.toString()}`;
 }
@@ -37,7 +46,7 @@ export function buildIcs(event: WeddingEvent, coupleNames: string): string {
     `DTEND:${toUtcStamp(event.endsAt)}`,
     `SUMMARY:${escapeIcsText(`${coupleNames}: ${event.name}`)}`,
     `DESCRIPTION:${escapeIcsText(eventDetails(event))}`,
-    `LOCATION:${escapeIcsText(`${event.venue}, ${event.address}`)}`,
+    `LOCATION:${escapeIcsText(eventLocation(event))}`,
     "BEGIN:VALARM",
     "TRIGGER:-P1D",
     "ACTION:DISPLAY",

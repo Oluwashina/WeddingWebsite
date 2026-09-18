@@ -77,10 +77,11 @@ export interface WeddingEvent {
   endsAt: string;
   displayDate: string;
   displayTime: string;
-  venue: string;
-  address: string;
+  /** Omitted when venue is shared privately after RSVP. */
+  venue?: string;
+  address?: string;
   /** Used to build the Google/Apple Maps deep link. */
-  mapsQuery: string;
+  mapsQuery?: string;
   dressCode?: string;
   accentColor: string;
   photo?: Photo;

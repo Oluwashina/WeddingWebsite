@@ -5,15 +5,9 @@ import { useEffect, useRef, useState } from "react";
 import { Reveal, RevealGroup, RevealItem } from "@/components/ui/Reveal";
 import { Section } from "@/components/ui/Section";
 import { SmartImage } from "@/components/ui/SmartImage";
-import {
-  CalendarIcon,
-  ClockIcon,
-  MapPinIcon,
-  SparkIcon,
-} from "@/components/ui/icons";
+import { CalendarIcon, ClockIcon, SparkIcon } from "@/components/ui/icons";
 import { downloadIcs, googleCalendarUrl } from "@/lib/calendar";
 import type { Couple, WeddingEvent } from "@/lib/types";
-import { mapsLink } from "@/lib/utils";
 
 function CalendarMenu({ event, coupleNames }: { event: WeddingEvent; coupleNames: string }) {
   const [open, setOpen] = useState(false);
@@ -33,7 +27,7 @@ function CalendarMenu({ event, coupleNames }: { event: WeddingEvent; coupleNames
   }, [open]);
 
   return (
-    <div className="relative flex-1" ref={ref}>
+    <div className="relative w-full" ref={ref}>
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
@@ -137,16 +131,6 @@ function EventCard({
             </dt>
             <dd className="text-ink">{event.displayDate}</dd>
           </div>
-          <div className="flex gap-3">
-            <dt className="mt-0.5 shrink-0 text-gold">
-              <MapPinIcon width={16} height={16} />
-              <span className="sr-only">Venue</span>
-            </dt>
-            <dd>
-              <span className="block text-ink">{event.venue}</span>
-              <span className="block text-ink-muted">{event.address}</span>
-            </dd>
-          </div>
           {event.dressCode ? (
             <div className="flex gap-3">
               <dt className="mt-0.5 shrink-0 text-gold">
@@ -169,17 +153,8 @@ function EventCard({
           </ul>
         ) : null}
 
-        <div className="mt-auto flex flex-col gap-2.5 pt-7 sm:flex-row">
+        <div className="mt-auto pt-7">
           <CalendarMenu event={event} coupleNames={couple.shortNames} />
-          <a
-            href={mapsLink(event.mapsQuery)}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex min-h-[46px] flex-1 items-center justify-center gap-2 rounded-full bg-ink px-4 font-sans text-[0.62rem] uppercase tracking-[0.18em] text-ivory transition-colors hover:bg-forest"
-          >
-            <MapPinIcon width={15} height={15} />
-            Get directions
-          </a>
         </div>
       </div>
     </article>
@@ -188,25 +163,19 @@ function EventCard({
 
 export function Events({ events, couple }: { events: WeddingEvent[]; couple: Couple }) {
   const dayLabel = events[0]?.displayDate ?? "Wedding day";
-  const locationLabel = events[0]?.address ?? "Lagos, Nigeria";
 
   return (
     <Section
       id="wedding"
       eyebrow="The Celebration"
       title="Wedding Details"
-      intro="One beautiful day in Lagos, with a traditional ceremony in the morning and a beautiful reception following immediately after. Save both to your calendar or tap for directions."
+      intro="One beautiful day in Lagos, with a traditional ceremony in the morning and a beautiful reception following immediately after. Save both to your calendar. Venue details go out to everyone who RSVPs."
     >
       <Reveal className="mx-auto mb-10 flex max-w-3xl justify-center sm:mb-12">
         <div className="inline-flex flex-wrap items-center justify-center gap-x-4 gap-y-2 rounded-full border border-ink/10 bg-champagne/30 px-6 py-3 text-center">
           <span className="inline-flex items-center gap-2 font-sans text-[0.62rem] uppercase tracking-[0.2em] text-ink-soft">
             <CalendarIcon width={14} height={14} className="text-gold" />
             {dayLabel}
-          </span>
-          <span className="hidden h-3 w-px bg-ink/15 sm:block" aria-hidden />
-          <span className="inline-flex items-center gap-2 font-sans text-[0.62rem] uppercase tracking-[0.2em] text-ink-soft">
-            <MapPinIcon width={14} height={14} className="text-gold" />
-            {locationLabel}
           </span>
         </div>
       </Reveal>

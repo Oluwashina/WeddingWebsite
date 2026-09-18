@@ -20,7 +20,7 @@ export const weddingContent: WeddingContent = {
     invitationEyebrow: "Tune in to",
     invitationHeadline: "#LOVETV",
     introduction:
-      "Two hearts, one love story, and a celebration we cannot wait to share with you. Join us as we begin forever, dressed in joy, surrounded by family, with lots of laughing and dancing.",
+      "Lol. Where do we start from? Anyway, we know you'd like a good gist. So, here you go…",
     logo: {
       src: "/images/tv-logo.png",
       alt: "#LOVETV",
@@ -45,7 +45,7 @@ export const weddingContent: WeddingContent = {
     id: "wedding-2026",
     startsAt: "2026-12-03T11:00:00+01:00",
     displayDate: "December 3rd, 2026",
-    displayLocation: "Ojodu Berger, Lagos",
+    displayLocation: "Lagos, Nigeria",
     city: "Lagos",
     country: "Nigeria",
     timezone: "Africa/Lagos",
@@ -72,9 +72,6 @@ export const weddingContent: WeddingContent = {
       endsAt: "2026-12-03T13:00:00+01:00",
       displayDate: "Thursday, 3 December 2026",
       displayTime: "11:00 AM to 1:00 PM",
-      venue: "Canaanland Event Centre",
-      address: "10, Limson Road, Ojodu Berger, Lagos.",
-      mapsQuery: "Canaanland Event Centre, 10 Limson Road, Ojodu Berger, Lagos",
       accentColor: "#c97885",
       photo: {
         src: "/images/event-traditional.jpg",
@@ -93,9 +90,6 @@ export const weddingContent: WeddingContent = {
       endsAt: "2026-12-03T22:00:00+01:00",
       displayDate: "Thursday, 3 December 2026",
       displayTime: "2:00 PM",
-      venue: "Canaanland Event Centre",
-      address: "10, Limson Road, Ojodu Berger, Lagos.",
-      mapsQuery: "Canaanland Event Centre, 10 Limson Road, Ojodu Berger, Lagos",
       accentColor: "#b8956a",
       photo: {
         src: "/images/event-reception.jpg",
@@ -136,7 +130,7 @@ export const weddingContent: WeddingContent = {
       title: "Forever Starts Here",
       location: "Lagos",
       body:
-        "On December 3rd, surrounded by the people who love, support and have prayed for us, we say yes to doing life forever; hand in hand, one foot in front of the other, until grey hairs. We cannot wait to celebrate with you.",
+        "On December 3rd, surrounded by the people who love us, support us and have our backs, we say yes to doing life forever; hand in hand, one foot in front of the other, until grey hairs. We cannot wait to celebrate with you.",
       photo: {
         src: "/images/story-forever-starts.jpeg",
         alt: "Temitope and Victor, forever starts here",
@@ -255,8 +249,8 @@ export const weddingContent: WeddingContent = {
       id: "faq-venue",
       question: "Where is the venue?",
       answer:
-        "Both the traditional wedding and reception take place at Canaanland Event Centre, 10 Limson Road, Ojodu Berger, Lagos on December 3rd, 2026. Tap “Get Directions” on any event card for Google Maps.",
-      link: { label: "View wedding details", href: "#wedding" },
+        "Venue details will be sent to everyone who RSVPs yes. Both the traditional wedding and reception are in Lagos on December 3rd, 2026.",
+      link: { label: "RSVP now", href: "#rsvp" },
     },
     {
       id: "faq-plus-one",
