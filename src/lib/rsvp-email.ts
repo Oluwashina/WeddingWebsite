@@ -1,6 +1,15 @@
 import nodemailer from "nodemailer";
 import type { RsvpRecord } from "@/lib/types";
 
+/** Comma- or semicolon-separated list from env (e.g. RSVP_NOTIFY_EMAIL). */
+function parseEmailList(raw: string | undefined): string[] {
+  if (!raw?.trim()) return [];
+  return raw
+    .split(/[,;]/)
+    .map((part) => part.trim())
+    .filter(Boolean);
+}
+
 function formatRecord(record: RsvpRecord): { text: string; html: string } {
   const attending = record.attending === "yes" ? "Yes, celebrating with you" : "Unable to attend";
   const message = record.message?.trim() || "—";
@@ -47,7 +56,8 @@ function formatRecord(record: RsvpRecord): { text: string; html: string } {
 }
 
 /**
- * Sends RSVP details to the inbox configured in RSVP_NOTIFY_EMAIL (defaults to GMAIL_USER).
+ * Sends RSVP details to RSVP_NOTIFY_EMAIL (comma-separated for multiple inboxes).
+ * Optional RSVP_NOTIFY_CC adds copy recipients. Defaults to GMAIL_USER when unset.
  * In production, missing config or a failed send throws so the API can surface an error.
  * In local dev without env vars, skips quietly so `.data/rsvps.json` still works.
  */
@@ -58,9 +68,11 @@ export async function sendRsvpNotification(record: RsvpRecord): Promise<void> {
 
   const user = process.env.GMAIL_USER;
   const pass = process.env.GMAIL_APP_PASSWORD?.replace(/\s/g, "");
-  const to = process.env.RSVP_NOTIFY_EMAIL ?? user;
+  const toList = parseEmailList(process.env.RSVP_NOTIFY_EMAIL);
+  const ccList = parseEmailList(process.env.RSVP_NOTIFY_CC);
+  const to = toList.length > 0 ? toList : user ? [user] : [];
 
-  if (!user || !pass || !to) {
+  if (!user || !pass || to.length === 0) {
     if (process.env.NODE_ENV === "production") {
       throw new Error("RSVP email is not configured (GMAIL_USER / GMAIL_APP_PASSWORD).");
     }
@@ -79,7 +91,8 @@ export async function sendRsvpNotification(record: RsvpRecord): Promise<void> {
 
   await transporter.sendMail({
     from: `"#LOVETV RSVP" <${user}>`,
-    to,
+    to: to.length === 1 ? to[0] : to,
+    ...(ccList.length > 0 ? { cc: ccList.length === 1 ? ccList[0] : ccList } : {}),
     replyTo: record.contact.includes("@") ? record.contact : undefined,
     subject,
     text,
