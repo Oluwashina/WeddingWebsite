@@ -49,8 +49,8 @@ export const weddingContent: WeddingContent = {
     city: "Lagos",
     country: "Nigeria",
     timezone: "Africa/Lagos",
-    rsvpDeadline: "2026-10-30T23:59:00+01:00",
-    rsvpDeadlineDisplay: "Friday, 30 October 2026",
+    rsvpDeadline: "2026-11-15T23:59:00+01:00",
+    rsvpDeadlineDisplay: "Sunday, 15 November 2026",
     siteUrl: "https://lovetv.wedding",
     shareMessage:
       "Temitope & Victor are getting married on December 3rd, 2026. Tune in to #LOVETV and open your invitation here:",
