@@ -143,8 +143,8 @@ export const weddingContent: WeddingContent = {
     headline: "Be Part of the Celebration",
     intro:
       "Our Aso Ebi is blush pink, the same beautiful cloth for ladies and gentlemen.",
-    deadline: "2026-10-30T23:59:00+01:00",
-    deadlineDisplay: "Friday, 30 October 2026",
+    deadline: "2026-11-15T23:59:00+01:00",
+    deadlineDisplay: "Sunday, 15 November 2026",
     footnote: "Please note that this amount doesn't include dispatch.",
     showBankDetails: true,
     bankAccounts: [
