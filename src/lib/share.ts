@@ -1,3 +1,4 @@
+import { sectionIdFromHash } from "@/lib/section-hash";
 import type { WeddingMeta } from "@/lib/types";
 
 export type ShareOutcome = "shared" | "fallback" | "cancelled";
@@ -5,7 +6,12 @@ export type ShareOutcome = "shared" | "fallback" | "cancelled";
 /** Prefer the live page URL in the browser; fall back to content for SSR. */
 export function getInvitationShareUrl(meta: WeddingMeta): string {
   if (typeof window !== "undefined") {
-    return window.location.href.split("#")[0];
+    const base = window.location.href.split("#")[0];
+    const hash = window.location.hash;
+    if (hash && sectionIdFromHash(hash)) {
+      return `${base}${hash}`;
+    }
+    return base;
   }
   return meta.siteUrl.replace(/\/$/, "");
 }

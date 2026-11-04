@@ -2,6 +2,7 @@
 
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import { DeepLinkScroll } from "@/components/experience/DeepLinkScroll";
 import { Envelope } from "@/components/experience/Envelope";
 import {
   InvitationContext,
@@ -12,6 +13,7 @@ import { Petals } from "@/components/ui/Petals";
 import { Ornament } from "@/components/ui/Ornament";
 import { useMusic } from "@/components/layout/MusicProvider";
 import { useLockBodyScroll } from "@/lib/hooks";
+import { sectionIdFromHash } from "@/lib/section-hash";
 import type { Couple, WeddingMeta } from "@/lib/types";
 
 const STORAGE_KEY = "ww:invitation-opened";
@@ -33,14 +35,20 @@ export function InvitationGate({ couple, meta, children }: InvitationGateProps) 
   const isRevealed = phase === "revealed";
   useLockBodyScroll(!isRevealed);
 
-  // Returning guests (refresh, back navigation) go straight to the site.
+  // Returning guests, or anyone opening a `#section` link, skip the envelope.
   useEffect(() => {
+    const deepLinkSection = sectionIdFromHash(window.location.hash);
     try {
-      if (window.sessionStorage.getItem(STORAGE_KEY) === "1") {
+      if (window.sessionStorage.getItem(STORAGE_KEY) === "1" || deepLinkSection) {
         setPhase("revealed");
+        if (deepLinkSection) {
+          window.sessionStorage.setItem(STORAGE_KEY, "1");
+        }
       }
     } catch {
-      /* private mode — just show the envelope */
+      if (deepLinkSection) {
+        setPhase("revealed");
+      }
     }
   }, []);
 
@@ -233,6 +241,7 @@ export function InvitationGate({ couple, meta, children }: InvitationGateProps) 
         transition={{ duration: isRevealed ? 0.9 : 0, delay: isRevealed ? 0.1 : 0, ease: silk }}
         aria-hidden={!isRevealed}
       >
+        {isRevealed ? <DeepLinkScroll /> : null}
         {children}
       </motion.div>
     </InvitationContext.Provider>

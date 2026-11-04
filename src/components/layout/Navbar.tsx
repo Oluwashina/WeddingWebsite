@@ -6,6 +6,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useInvitation } from "@/components/experience/InvitationContext";
 import { CloseIcon, MenuIcon } from "@/components/ui/icons";
 import { useLockBodyScroll, useScrollSpy, useScrolled } from "@/lib/hooks";
+import { scrollToSection, writeSectionHash } from "@/lib/section-hash";
 import type { Couple } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
@@ -64,9 +65,9 @@ export function Navbar({ couple }: { couple: Couple }) {
 
   const go = useCallback((id: string) => {
     setMenuOpen(false);
-    // Let the menu finish closing before scrolling so the transition reads well.
+    writeSectionHash(id);
     window.setTimeout(() => {
-      document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+      scrollToSection(id);
     }, 160);
   }, []);
 
@@ -82,9 +83,12 @@ export function Navbar({ couple }: { couple: Couple }) {
         style={{ height: "var(--nav-height)" }}
       >
         <nav className="container-page flex h-full items-center justify-between gap-4">
-          <button
-            type="button"
-            onClick={() => go("home")}
+          <a
+            href="#home"
+            onClick={(event) => {
+              event.preventDefault();
+              go("home");
+            }}
             className={cn(
               "flex items-baseline gap-2.5 transition-colors",
               scrolled ? "text-ink" : "text-ink",
@@ -106,14 +110,17 @@ export function Navbar({ couple }: { couple: Couple }) {
             <span className="hidden font-sans text-[0.58rem] uppercase tracking-[0.32em] text-ink-muted sm:inline">
               {couple.shortNames}
             </span>
-          </button>
+          </a>
 
           <div className="hidden items-center gap-7 lg:flex">
             {DESKTOP_ITEMS.map((item) => (
-              <button
+              <a
                 key={item.id}
-                type="button"
-                onClick={() => go(item.id)}
+                href={`#${item.id}`}
+                onClick={(event) => {
+                  event.preventDefault();
+                  go(item.id);
+                }}
                 className={cn(
                   "relative py-2 font-sans text-[0.63rem] uppercase tracking-[0.24em] transition-colors duration-300",
                   active === item.id ? "text-gold" : "text-ink-soft hover:text-ink",
@@ -127,18 +134,21 @@ export function Navbar({ couple }: { couple: Couple }) {
                     transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
                   />
                 ) : null}
-              </button>
+              </a>
             ))}
           </div>
 
           <div className="flex items-center gap-1 text-ink-soft">
-            <button
-              type="button"
-              onClick={() => go("rsvp")}
+            <a
+              href="#rsvp"
+              onClick={(event) => {
+                event.preventDefault();
+                go("rsvp");
+              }}
               className="hidden min-h-[44px] items-center rounded-full bg-ink px-6 font-sans text-[0.63rem] uppercase tracking-[0.22em] text-ivory transition-colors hover:bg-forest lg:inline-flex"
             >
               RSVP
-            </button>
+            </a>
             <button
               type="button"
               onClick={() => setMenuOpen(true)}
@@ -186,10 +196,13 @@ export function Navbar({ couple }: { couple: Couple }) {
 
               <nav className="flex flex-1 flex-col justify-center gap-1 pb-16">
                 {NAV_ITEMS.map((item, index) => (
-                  <motion.button
+                  <motion.a
                     key={item.id}
-                    type="button"
-                    onClick={() => go(item.id)}
+                    href={`#${item.id}`}
+                    onClick={(event) => {
+                      event.preventDefault();
+                      go(item.id);
+                    }}
                     className="group flex items-baseline gap-4 py-3 text-left"
                     initial={{ opacity: 0, y: 18 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -201,7 +214,7 @@ export function Navbar({ couple }: { couple: Couple }) {
                     <span className="font-display text-[2rem] leading-tight text-ivory transition-colors group-hover:text-gold-light">
                       {item.label}
                     </span>
-                  </motion.button>
+                  </motion.a>
                 ))}
 
                 <motion.div
@@ -210,13 +223,16 @@ export function Navbar({ couple }: { couple: Couple }) {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.45, ease: [0.22, 1, 0.36, 1] }}
                 >
-                  <button
-                    type="button"
-                    onClick={() => go("rsvp")}
+                  <a
+                    href="#rsvp"
+                    onClick={(event) => {
+                      event.preventDefault();
+                      go("rsvp");
+                    }}
                     className="inline-flex min-h-[54px] w-full max-w-sm items-center justify-center rounded-full bg-gold px-8 font-sans text-[0.7rem] uppercase tracking-[0.26em] text-ink"
                   >
                     RSVP Now
-                  </button>
+                  </a>
                 </motion.div>
               </nav>
             </div>
