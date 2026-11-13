@@ -4,7 +4,6 @@ import { MusicProvider } from "@/components/layout/MusicProvider";
 import { MusicToggle } from "@/components/layout/MusicToggle";
 import { Navbar } from "@/components/layout/Navbar";
 import { StickyRsvpBar } from "@/components/layout/StickyRsvpBar";
-import { AsoEbi } from "@/components/sections/AsoEbi";
 import { Contact } from "@/components/sections/Contact";
 import { DressCode } from "@/components/sections/DressCode";
 import { Events } from "@/components/sections/Events";
@@ -18,7 +17,7 @@ import { getWeddingContent } from "@/lib/content";
 
 export default async function HomePage() {
   const content = await getWeddingContent();
-  const { couple, meta, events, story, asoEbi, registry, faqs, gallery, dressCode, contacts, socials } =
+  const { couple, meta, events, story, registry, faqs, gallery, dressCode, contacts, socials } =
     content;
 
   return (
@@ -31,7 +30,6 @@ export default async function HomePage() {
           <Story story={story} couple={couple} />
           <Events events={events} couple={couple} />
           <Rsvp couple={couple} meta={meta} contact={contacts[0]} />
-          <AsoEbi asoEbi={asoEbi} couple={couple} />
           <DressCode dressCode={dressCode} couple={couple} />
           <Gallery photos={gallery} couple={couple} />
           <Registry registry={registry} couple={couple} contact={contacts[0]} />

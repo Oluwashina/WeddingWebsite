@@ -15,7 +15,6 @@ const NAV_ITEMS = [
   { id: "story", label: "Our Story" },
   { id: "wedding", label: "Wedding" },
   { id: "gallery", label: "Gallery" },
-  { id: "aso-ebi", label: "Aso Ebi" },
   { id: "registry", label: "Registry" },
   { id: "faq", label: "FAQ" },
 ];
@@ -27,7 +26,6 @@ const SPY_IDS = [
   "story",
   "wedding",
   "rsvp",
-  "aso-ebi",
   "dress-code",
   "gallery",
   "registry",

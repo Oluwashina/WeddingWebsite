@@ -241,8 +241,7 @@ export const weddingContent: WeddingContent = {
     {
       id: "faq-wear",
       question: "What should I wear?",
-      answer:
-        "The wedding colours are Blush pink and caramel. You can show up in our Aso Ebi, if you ordered it. However, it is not compulsory.",
+      answer: "The wedding colours are Blush pink and caramel.",
       link: { label: "See the dress code", href: "#dress-code" },
     },
     {
@@ -263,13 +262,6 @@ export const weddingContent: WeddingContent = {
       question: "When should I RSVP?",
       answer: "By Friday, 30 October 2026 please.",
       link: { label: "RSVP now", href: "#rsvp" },
-    },
-    {
-      id: "faq-aso-ebi",
-      question: "Where can I get the Aso Ebi?",
-      answer:
-        "Tap “Get Aso Ebi” for pricing. Pay into the Access Bank account shown, then send your proof of payment to Funmilayo on +234 907 559 2973.",
-      link: { label: "Get Aso Ebi", href: "#aso-ebi" },
     },
     {
       id: "faq-gift",
@@ -333,7 +325,7 @@ export const weddingContent: WeddingContent = {
     id: "dress-code-2026",
     intro: "Come as yourself. These are the colours of the day.",
     colors: "Blush pink or caramel",
-    note: "Traditional, formal, or cocktail, whatever you feel best in. Aso Ebi is welcome if you ordered it.",
+    note: "Traditional, formal, or cocktail, whatever you feel best in.",
     palette: [
       { name: "Blush pink", hex: "#e8a4ad" },
       { name: "Caramel", hex: "#b8956a" },
@@ -348,13 +340,6 @@ export const weddingContent: WeddingContent = {
       role: "Guest Support",
       phone: "+234 903 254 3184",
       whatsapp: "2349032543184",
-    },
-    {
-      id: "contact-funmilayo",
-      name: "Funmilayo",
-      role: "Aso Ebi",
-      phone: "+234 907 559 2973",
-      whatsapp: "2349075592973",
     },
   ],
 

@@ -4,7 +4,6 @@ export const LINKABLE_SECTION_IDS = [
   "story",
   "wedding",
   "rsvp",
-  "aso-ebi",
   "dress-code",
   "gallery",
   "registry",
